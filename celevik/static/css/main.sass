@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap')
+
+$white: #ffffff
+$bg_color: #FDFDFE
+$bgAltColor: #F8F9FA
+$linkColor: #176DEA
+$textColor: #292C33
+$textColor2: #424347
+$purpleColor: #7A7DF5
+$shadowColor: rgba(125,143,179,0.15)
+
+*
+  font-family: "Roboto", sans-serif
+  color: $textColor
+
+
+html, body
+  margin: 0
+  padding: 0
+  min-height: 100vh
+  background: $bg_color
+
+a
+  text-decoration: none
+  color: inherit
+  cursor: pointer
+  &:hover
+    color: inherit
+    text-decoration: none
+
+ul, li
+  padding: 0
+  margin: 0
+
+h1, h2, h3, h4, h5
+  padding: 0
+  margin: 0
+
+
+input, .form-control
+  &:focus
+    //border-color: $headline-color
+    box-shadow: none
+  &.is-invalid:focus
+    box-shadow: none
+
+
+nav
+  &.navbar
+    min-height: 70px
+    @media (max-width: 767px)
+      padding: 0 15px
+    @media (min-width: 767px)
+      padding: 0 50px
+  box-shadow: 0 2px 66px $shadowColor
+  background: $white
+  .navbar-brand
+    color: $textColor
+    font-size: 1.5rem
+    font-weight: bold
+  .nav-btn
+    user-select: none
+    background: $linkColor
+    padding: 5px 30px
+    color: $white
+    border-radius: 70px
+    font-size: 1.25rem
+    font-weight: bold
+
