@@ -78,4 +78,10 @@ nav {
     color: #424347;
     user-select: none; }
 
-/*# sourceMappingURL=main.css.map */
+.search-box {
+  padding-top: 10px;
+  min-height: 420px;
+  background: #F8F9FA;
+  margin-bottom: 20px; }
+
+/*# sourceMappingURL=index.css.map */
