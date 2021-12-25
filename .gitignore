@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 
 celevik_old/
+celevik/.idea/workspace.xml
