@@ -25,9 +25,7 @@ def registration(request):
             validate_password(password)
         except ValidationError as vale:
             return render(request, "registration/registration.html", {'vale': vale})
-        # Создайте пользователя и сохраните его в базе данных
         new_user = User.objects.create_user(username=email, email=email, password=password)
-        # Обновите поля и сохраните их снова
         new_user.is_active = False
         new_user.save()
         code = generate_code()
