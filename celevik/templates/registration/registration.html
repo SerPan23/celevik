@@ -10,7 +10,12 @@
                     {% if error_pass %}
                         <p style="color: red;">Пароли не совпадают. Пожалуйста, попробуйте еще раз.</p>
                     {% endif %}
-                    <form class="formbox mb-4" method="POST" action="reg_user/">
+                    {% if vale %}
+                        {% for error in vale %}
+                            <p style="color: red;">{{ error|escape }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    <form class="formbox mb-4" method="POST" action="/registration">
                         {% csrf_token %}
                         <h2 style="text-align: center;">Регистрация</h2><br>
                         <div class="input-group flex-nowrap mb-4">

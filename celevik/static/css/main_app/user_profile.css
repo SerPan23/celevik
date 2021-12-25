@@ -119,4 +119,10 @@ nav {
   .link:hover {
     color: #176DEA; }
 
+.info-box {
+  padding-top: 10px;
+  min-height: 620px;
+  background: #F8F9FA;
+  margin-bottom: 20px; }
+
 /*# sourceMappingURL=user_profile.css.map */

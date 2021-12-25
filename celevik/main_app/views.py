@@ -1,3 +1,5 @@
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from django.shortcuts import render
 from django.core.mail import send_mail
 import random
@@ -13,22 +15,16 @@ def index(request):
 
 
 def registration(request):
-    error_pass = request.GET.get("error_pass", "")
-    return render(request, "registration/registration.html", {'error_pass': error_pass})
-
-
-def generate_code():
-    random.seed()
-    return str(random.randint(10000, 99999999))
-
-
-def reg_user(request):
     if request.method == "POST":
         email = request.POST.get("email")
         password = request.POST.get("password")
         password2 = request.POST.get("password2")
         if password != password2:
             return HttpResponseRedirect("/registration?error_pass=True")
+        try:
+            validate_password(password)
+        except ValidationError as vale:
+            return render(request, "registration/registration.html", {'vale': vale})
         # Создайте пользователя и сохраните его в базе данных
         new_user = User.objects.create_user(username=email, email=email, password=password)
         # Обновите поля и сохраните их снова
@@ -42,7 +38,13 @@ def reg_user(request):
         send_mail(settings.EMAIL_TOPIC, message,
                   settings.EMAIL_HOST_USER, [email])
         return HttpResponseRedirect("/account_confirmation?username=" + email)
-    return HttpResponseRedirect("/login")
+    error_pass = request.GET.get("error_pass", "")
+    return render(request, "registration/registration.html", {'error_pass': error_pass})
+
+
+def generate_code():
+    random.seed()
+    return str(random.randint(10000, 99999999))
 
 
 def account_confirmation(request):
@@ -70,4 +72,4 @@ def user_profile(request):
     uid = request.user.id
     user = User.objects.get(id=uid)
     u = UsersInf.objects.get(user=user)
-    return render(request, 'main_app/user_profile.html')
+    return render(request, 'main_app/user_profile.html', {'u': u})
