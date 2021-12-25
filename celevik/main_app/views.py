@@ -64,3 +64,10 @@ def account_confirmed(request):
             return HttpResponseRedirect("/login/")
         else:
             return HttpResponseRedirect("/account_confirmation?username=" + username + "&error=True")
+
+
+def user_profile(request):
+    uid = request.user.id
+    user = User.objects.get(id=uid)
+    u = UsersInf.objects.get(user=user)
+    return render(request, 'main_app/user_profile.html')
