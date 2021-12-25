@@ -119,10 +119,19 @@ nav {
   .link:hover {
     color: #176DEA; }
 
-.search-box {
-  padding-top: 10px;
-  min-height: 420px;
-  background: #F8F9FA;
-  margin-bottom: 20px; }
+.warp {
+  padding: 170px 30px 0px !important; }
 
-/*# sourceMappingURL=index.css.map */
+.main p {
+  text-align: left !important;
+  font-size: 0.86em;
+  margin-left: -10px; }
+
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem; }
+
+#eye:hover {
+  cursor: pointer; }
+
+/*# sourceMappingURL=login.css.map */

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/registration/login.css' %}">
+{% endblock links %}
+{% block content %}
+    <div class="main">
+            <div class="container warp">
+                <div class="box mt-auto mb-auto">
+                    {% if form.errors %}
+                        <p style="color: red;">Ваше имя пользователя и пароль не совпадают. Пожалуйста, попробуйте еще раз.</p>
+                    {% endif %}
+                    <div class="formbox">
+                        <h2 style="text-align: center;">Войти</h2><br>
+                        <form class="needs-validation mb-4" novalidate method="post" action="{% url 'login' %}">
+                            {% csrf_token %}
+                            <div class="input-group flex-nowrap mb-4">
+                                <div class="input-group-text formInput">
+                                    <i class="far fa-envelope"></i>
+                                </div>
+                                <input id="id_username" type="email" name="username" class="textinput textInput  form-control formInput" placeholder="example@example.com" aria-label="email"
+                                    aria-describedby="addon-wrapping">
+                            </div>
+                            <div class="input-group flex-nowrap mb-4">
+                                <div class="input-group-text formInput">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <input id="id_password" type="password" class="textinput textInput  form-control formInput" name="password" placeholder="Пароль" required>
+                                <div class="input-group-text formInput" onclick="showHidePwd()" style="cursor: pointer;">
+                                        <i id="eye" class="far fa-eye-slash"></i>
+                                </div>
+                            </div>
+                            <button class="btn-styled link-btn">Войти</button>
+                        </form>
+                        <p>
+                            <a href="{% url 'password_reset' %}" class="link">Забыли пароль?</a>
+                        </p>
+                        <p>
+                            <a href="/registration" class="link">Еще нет аккаунта? Зарегистрируйтесь</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock content %}
+
+{% block scripts %}
+    <script>
+            function showHidePwd(){
+                var input = document.getElementById("id_password");
+                if (input.type === "password") {
+                    input.type = "text";
+                    document.getElementById("eye").className = "far fa-eye";
+                } else {
+                    input.type = "password";
+                    document.getElementById("eye").className = "far fa-eye-slash";
+                }
+            }
+    </script>
+{% endblock scripts %}

@@ -119,10 +119,20 @@ nav {
   .link:hover {
     color: #176DEA; }
 
-.search-box {
-  padding-top: 10px;
-  min-height: 420px;
-  background: #F8F9FA;
-  margin-bottom: 20px; }
+.warp {
+  /* padding-top: 150px !important; */
+  /* background-color: #fff; */
+  padding: 170px 0 0 !important; }
 
-/*# sourceMappingURL=index.css.map */
+.box {
+  padding: 30px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 66px rgba(125, 143, 179, 0.15); }
+
+.link {
+  text-decoration: none; }
+  .link:hover {
+    color: #176DEA; }
+
+/*# sourceMappingURL=registration.css.map */

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock links %}
+{% block content %}
+    <div class="container" style="padding-top: 170px">
+        <div class="box mt-auto mb-auto" >
+            {% if form.errors %}
+                <p style="color: red;">Не верный код активации. Пожалуйста, попробуйте еще раз.</p>
+            {% endif %}
+            <div class="formbox">
+                <form action="/account_confirmed/" method="POST">
+                    {% csrf_token %}
+                    <p style="font-size: 1.2em;">Введите код подтверждения</p>
+                    <div class="input-group flex-nowrap mb-3">
+                        <div class="input-group-text formInput">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <input type="text" class="textinput textInput  form-control formInput" name="code" placeholder="Код активации" required>
+                        <input style="display: none;" name="username" value="{{username}}">
+                    </div>
+                    <input type="submit" class="btn-styled link-btn" value="Активировать" />
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

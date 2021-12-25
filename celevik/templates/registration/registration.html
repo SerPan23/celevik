@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/registration/registration.css' %}">
+{% endblock links %}
+
+{% block content %}
+            <div class="container warp">
+                <div class="box mt-auto mb-auto">
+                    {% if error_pass %}
+                        <p style="color: red;">Пароли не совпадают. Пожалуйста, попробуйте еще раз.</p>
+                    {% endif %}
+                    <form class="formbox mb-4" method="POST" action="reg_user/">
+                        {% csrf_token %}
+                        <h2 style="text-align: center;">Регистрация</h2><br>
+                        <div class="input-group flex-nowrap mb-4">
+                            <div class="input-group-text formInput">
+                                <i class="far fa-envelope"></i>
+                            </div>
+                            <input type="email" name="email" class="form-control formInput" placeholder="example@gmail.com" aria-label="email"
+                                aria-describedby="addon-wrapping" required>
+                        </div>
+                        <div class="input-group flex-nowrap mb-4">
+                            <div class="input-group-text formInput">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <input type="password" class="form-control formInput" name="password" placeholder="Пароль" required>
+                        </div>
+                        <div class="input-group flex-nowrap mb-4">
+                            <div class="input-group-text formInput">
+                               <i class="fas fa-lock"></i>
+                            </div>
+                            <input type="password" class="form-control formInput" name="password2" placeholder="Повторите пароль" required>
+                        </div>
+                        <div class="form-check mb-4" style="text-align: left; margin: 0 0.5em">
+                            <input name="accessPrivacy" type="checkbox" class="form-check-input" id="accessPrivacy" required>
+                            <label class="form-check-label" for="accessPrivacy">Согласен с
+                                    <a href="#" class="links">политикой конфиденциальности</a>
+                            </label>
+                        </div>
+                        <button class="btn-styled link-btn" type="submit">Зарегистрироваться</button>
+                    </form>
+                </div>
+            </div>
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}
+
