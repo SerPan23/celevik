@@ -120,9 +120,30 @@ nav {
     color: #176DEA; }
 
 .info-box {
-  padding-top: 10px;
-  min-height: 620px;
+  padding-top: 50px;
+  min-height: 550px;
   background: #F8F9FA;
   margin-bottom: 20px; }
+  .info-box .photo-box {
+    max-width: 450px;
+    max-height: 450px;
+    border-radius: 400px; }
+    .info-box .photo-box img {
+      border-radius: 400px;
+      width: 450px;
+      height: 450px; }
+  .info-box .info {
+    min-height: 450px;
+    display: table; }
+    .info-box .info .info-data {
+      display: table-cell;
+      vertical-align: middle; }
+      .info-box .info .info-data .name {
+        color: #292C33; }
+      .info-box .info .info-data .email, .info-box .info .info-data .phone, .info-box .info .info-data .bdate {
+        color: #424347; }
+
+.text-about-me {
+  font-weight: normal; }
 
 /*# sourceMappingURL=user_profile.css.map */

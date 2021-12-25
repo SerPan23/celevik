@@ -1,7 +1,28 @@
 @import "../main"
 
 .info-box
-  padding-top: 10px
-  min-height: 620px
+  padding-top: 50px
+  min-height: 550px
   background: $bgAltColor
   margin-bottom: 20px
+  .photo-box
+    max-width: 450px
+    max-height: 450px
+    border-radius: 400px
+    img
+      border-radius: 400px
+      width: 450px
+      height: 450px
+  .info
+    min-height: 450px
+    display: table
+    .info-data
+      display: table-cell
+      vertical-align: middle
+      .name
+        color: $textColor
+      .email, .phone, .bdate
+        color: $textColor2
+
+.text-about-me
+  font-weight: normal

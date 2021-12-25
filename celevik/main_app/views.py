@@ -67,7 +67,8 @@ def account_confirmed(request):
 
 
 def user_profile(request):
-    uid = request.user.id
-    user = User.objects.get(id=uid)
-    u = UsersInf.objects.get(user=user)
-    return render(request, 'main_app/user_profile.html', {'u': u})
+    # uid = request.user.id
+    # user = User.objects.get(id=uid)
+    # u = UsersInf.objects.get(user=user)
+    # return render(request, 'main_app/user_profile.html', {'u': u})
+    return render(request, 'main_app/user_profile.html')

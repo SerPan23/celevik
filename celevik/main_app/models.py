@@ -19,6 +19,7 @@ class UsersInf(models.Model):
     name = models.CharField("Имя", null=True, max_length=150)
     patronymic = models.CharField("Отчество", null=True, max_length=150)
     role = models.CharField("Статуc", choices=ROLE_CHOICES, default='Entrant', max_length=30)
+    text_about = models.TextField("Текст о пользователе", default='')
 
     def __str__(self):
         return 'Profile for user {}'.format(self.user.email)
