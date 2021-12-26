@@ -72,3 +72,11 @@ def user_profile(request):
     # u = UsersInf.objects.get(user=user)
     # return render(request, 'main_app/user_profile.html', {'u': u})
     return render(request, 'main_app/user_profile.html')
+
+
+def user_profile_editor(request):
+    # uid = request.user.id
+    # user = User.objects.get(id=uid)
+    # u = UsersInf.objects.get(user=user)
+    # return render(request, 'main_app/user_profile.html', {'u': u})
+    return render(request, 'main_app/user_profile_editor.html')
