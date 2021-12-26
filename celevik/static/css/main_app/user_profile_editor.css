@@ -125,4 +125,15 @@ nav {
   .link:hover {
     color: #176DEA; }
 
+.warp {
+  padding: 170px 30px 0px !important; }
+
+#image {
+  display: block;
+  /* This rule is very important, please don't ignore this */
+  max-width: 100%; }
+
+.cropper-view-box, .cropper-face {
+  border-radius: 50%; }
+
 /*# sourceMappingURL=user_profile_editor.css.map */
