@@ -53,6 +53,12 @@ nav {
     border-radius: 70px;
     font-size: 1.35rem;
     font-weight: bold; }
+  nav .logout-link {
+    color: #BB2124 !important; }
+  nav .dropdown-item {
+    color: #292C33;
+    font-weight: 500;
+    font-size: 1.1rem; }
 
 .vacancy-card {
   min-height: 300px;

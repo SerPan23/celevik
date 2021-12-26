@@ -6,15 +6,27 @@
   background: $bgAltColor
   margin-bottom: 20px
   .photo-box
-    max-width: 450px
-    max-height: 450px
+    @media (max-width: 1023px)
+      max-width: 300px
+      max-height: 300px
+    @media (min-width: 1024px)
+      max-width: 450px
+      max-height: 450px
     border-radius: 400px
     img
+      @media (max-width: 1023px)
+        width: 300px
+        height: 300px
+      @media (min-width: 1024px)
+        width: 450px
+        height: 450px
       border-radius: 400px
-      width: 450px
-      height: 450px
   .info
-    min-height: 450px
+    @media (max-width: 1023px)
+      min-height: 200px
+    @media (min-width: 1024px)
+      min-height: 450px
+    height: 100%
     display: table
     .info-data
       display: table-cell
