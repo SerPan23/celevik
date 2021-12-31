@@ -3,11 +3,20 @@
 .warp
     padding: 170px 30px 0px !important
 
-
-#image
+.photo-box
     display: block
-    /* This rule is very important, please don't ignore this */
-    max-width: 100%
-
-.cropper-view-box, .cropper-face
-    border-radius: 50%
+    @media (max-width: 1023px)
+        max-width: 200px
+        max-height: 200px
+    @media (min-width: 1024px)
+        max-width: 450px
+        max-height: 450px
+    border-radius: 400px
+    img
+        @media (max-width: 1023px)
+            width: 200px
+            height: 200px
+        @media (min-width: 1024px)
+            width: 450px
+            height: 450px
+        border-radius: 400px

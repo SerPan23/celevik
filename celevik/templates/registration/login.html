@@ -12,7 +12,12 @@
                     {% endif %}
                     <div class="formbox">
                         <h2 style="text-align: center;">Войти</h2><br>
-                        <form class="needs-validation mb-4" novalidate method="post" action="{% url 'login' %}">
+                        {% if next %}
+                            <form class="needs-validation mb-4" novalidate method="post" action="{% url 'login' %}?next={{next}}">
+                        {%else%}
+                            <form class="needs-validation mb-4" novalidate method="post" action="{% url 'login' %}">
+                        {% endif %}
+
                             {% csrf_token %}
                             <div class="input-group flex-nowrap mb-4">
                                 <div class="input-group-text formInput">

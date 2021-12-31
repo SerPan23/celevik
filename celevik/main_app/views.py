@@ -1,3 +1,5 @@
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.shortcuts import render
@@ -5,6 +7,8 @@ from django.core.mail import send_mail
 import random
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 from .models import UsersInf
 from celevik import settings
 
@@ -66,17 +70,68 @@ def account_confirmed(request):
             return HttpResponseRedirect("/account_confirmation?username=" + username + "&error=True")
 
 
+@login_required
 def user_profile(request):
-    # uid = request.user.id
-    # user = User.objects.get(id=uid)
-    # u = UsersInf.objects.get(user=user)
-    # return render(request, 'main_app/user_profile.html', {'u': u})
-    return render(request, 'main_app/user_profile.html')
+    uid = request.user.id
+    user = User.objects.get(id=uid)
+    u_info = UsersInf.objects.get(user=user)
+    return render(request, 'main_app/user_profile.html', {'u_info': u_info})
 
 
+@login_required
 def user_profile_editor(request):
+    uid = request.user.id
+    user = User.objects.get(id=uid)
+    u_info = UsersInf.objects.get(user=user)
+    error_pass = request.GET.get("error_pass", "")
+    if request.method == "POST":
+        pass_edit = request.POST.get("pass_edit", "")
+        info_edit = request.POST.get("info_edit", "")
+        username = request.POST.get("username")
+        if pass_edit:
+            oldpassword = request.POST.get("old_password")
+            password = request.POST.get("new_password1")
+            password2 = request.POST.get("new_password2")
+            if password != password2 or password == '' or not user.check_password(str(oldpassword)):
+                return HttpResponseRedirect("/user_profile_editor?error_pass=True")
+            else:
+                try:
+                    validate_password(password)
+                except ValidationError as vale:
+                    return render(request, 'main_app/user_profile_editor.html',
+                                  {'u_info': u_info, 'error_pass': error_pass, 'vale': vale})
+                user.set_password(password)
+                user.save()
+                user = authenticate(username=username, password=password)
+                login(request, user)
+        if info_edit:
+            name = request.POST.get("name")
+            surname = request.POST.get("surname")
+            patronymic = request.POST.get("patronymic")
+            phone_number = request.POST.get("phone_number")
+            date_of_birth = request.POST.get("date_of_birth")
+            text_about = request.POST.get("text_about")
+            if name != '':
+                u_info.name = name
+            if surname != '':
+                u_info.surname = surname
+            if patronymic != '':
+                u_info.patronymic = patronymic
+            if phone_number != '':
+                u_info.phone_number = phone_number
+            if date_of_birth != '':
+                u_info.date_of_birth = date_of_birth
+            if text_about != '':
+                u_info.text_about = text_about
+            if request.FILES["avatar"]:
+                u_info.image = request.FILES["avatar"]
+            u_info.save()
+    return render(request, 'main_app/user_profile_editor.html', {'u_info': u_info, 'error_pass': error_pass})
+
+
+def organization_profile(request):
     # uid = request.user.id
     # user = User.objects.get(id=uid)
-    # u = UsersInf.objects.get(user=user)
-    # return render(request, 'main_app/user_profile.html', {'u': u})
-    return render(request, 'main_app/user_profile_editor.html')
+    # u_info = UsersInf.objects.get(user=user)
+    # return render(request, 'main_app/organization_profile.html', {'u_info': u_info})
+    return render(request, 'main_app/organization_profile.html')

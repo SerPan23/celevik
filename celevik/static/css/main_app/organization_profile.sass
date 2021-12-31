@@ -1,0 +1,24 @@
+@import "../main"
+
+.info-box
+  padding-top: 50px
+  min-height: 550px
+  background: $bgAltColor
+  margin-bottom: 20px
+  .info
+    @media (max-width: 1023px)
+      min-height: 200px
+    @media (min-width: 1024px)
+      min-height: 450px
+    height: 100%
+    display: table
+    .info-data
+      display: table-cell
+      vertical-align: top
+      .name
+        color: $textColor
+      .email, .phone, .bdate
+        color: $textColor2
+
+.text-about-me
+  font-weight: normal

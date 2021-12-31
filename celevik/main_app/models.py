@@ -11,13 +11,15 @@ class UsersInf(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True,
                                 default='',
-                                verbose_name="Связь с таблицей пользователей")
+                                verbose_name="Связь с таблицей пользователей", related_name="user_info")
+    image = models.ImageField("Фотография профиля", blank=True, upload_to="puples_photo",
+                              default="puples_photo/default_avatar.png")
     date_of_birth = models.DateField(blank=True, null=True)
     phone_number = models.CharField("Номер телефона", null=True, max_length=150)
     code = IntegerField("Код активации", null=False)
-    surname = models.CharField("Фамилия", null=True, max_length=150)
+    surname = models.CharField("Фамилия", null=True, blank=True, max_length=150)
     name = models.CharField("Имя", null=True, max_length=150)
-    patronymic = models.CharField("Отчество", null=True, max_length=150)
+    patronymic = models.CharField("Отчество", null=True, blank=True, max_length=150)
     role = models.CharField("Статуc", choices=ROLE_CHOICES, default='Entrant', max_length=30)
     text_about = models.TextField("Текст о пользователе", default='')
 
