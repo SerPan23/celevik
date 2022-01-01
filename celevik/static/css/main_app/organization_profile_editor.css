@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+* {
+  font-family: "Roboto", sans-serif;
+  color: #292C33; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: #FDFDFE; }
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer; }
+  a:hover {
+    color: inherit;
+    text-decoration: none; }
+
+ul, li {
+  padding: 0;
+  margin: 0; }
+
+h1, h2, h3, h4, h5 {
+  padding: 0;
+  margin: 0; }
+
+input:focus, .form-control:focus {
+  box-shadow: none; }
+input.is-invalid:focus, .form-control.is-invalid:focus {
+  box-shadow: none; }
+
+nav {
+  box-shadow: 0 2px 66px rgba(125, 143, 179, 0.15);
+  background: #ffffff; }
+  nav.navbar {
+    min-height: 70px; }
+    @media (max-width: 767px) {
+      nav.navbar {
+        padding: 0 15px; } }
+    @media (min-width: 767px) {
+      nav.navbar {
+        padding: 0 50px; } }
+  nav .navbar-brand {
+    color: #292C33;
+    font-size: 1.8rem;
+    font-weight: bold; }
+  nav .nav-btn {
+    user-select: none;
+    background: #176DEA;
+    padding: 5px 30px;
+    color: #ffffff;
+    border-radius: 70px;
+    font-size: 1.35rem;
+    font-weight: bold; }
+  nav .logout-link {
+    color: #BB2124 !important; }
+  nav .dropdown-item {
+    color: #292C33;
+    font-weight: 500;
+    font-size: 1.1rem; }
+
+.vacancy-card {
+  min-height: 300px;
+  box-shadow: 0 2px 66px rgba(125, 143, 179, 0.15);
+  border-radius: 12px;
+  min-width: 100%;
+  background: #ffffff;
+  padding: 15px 10px;
+  text-align: center; }
+  .vacancy-card .name {
+    color: #292C33; }
+  .vacancy-card .description {
+    margin-top: 20px;
+    color: #424347; }
+  .vacancy-card .partners {
+    margin-top: 15px;
+    color: #424347; }
+    .vacancy-card .partners .partner {
+      color: #7A7DF5; }
+  .vacancy-card .more-detailed {
+    margin-top: 15px;
+    text-decoration: underline;
+    color: #424347;
+    user-select: none; }
+
+.btn-styled {
+  padding: 0.3em 1.4em;
+  transition: box-shadow 0.1s;
+  box-shadow: 0 0 0 3px transparent;
+  font-weight: 500; }
+  .btn-styled[disabled] {
+    opacity: 0.4; }
+  .btn-styled:hover {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)); }
+  .btn-styled:active {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)); }
+  .btn-styled:not([disabled]) {
+    cursor: pointer; }
+  .btn-styled.link-btn {
+    border: 0;
+    border-radius: 70px;
+    background-color: #176DEA;
+    color: #ffffff;
+    font-size: 1.2em; }
+  .btn-styled:focus {
+    outline: none; }
+  .btn-styled::-moz-focus-inner {
+    border: 0; }
+
+.textInput:focus {
+  border-color: #176DEA !important; }
+
+.formInput {
+  border-radius: 30px; }
+
+.box {
+  padding: 30px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 66px rgba(125, 143, 179, 0.15); }
+
+.link {
+  text-decoration: none; }
+  .link:hover {
+    color: #176DEA; }
+
+.warp {
+  padding: 170px 30px 0px !important; }
+
+/*# sourceMappingURL=organization_profile_editor.css.map */

@@ -129,9 +129,49 @@ def user_profile_editor(request):
     return render(request, 'main_app/user_profile_editor.html', {'u_info': u_info, 'error_pass': error_pass})
 
 
+@login_required
 def organization_profile(request):
-    # uid = request.user.id
-    # user = User.objects.get(id=uid)
-    # u_info = UsersInf.objects.get(user=user)
-    # return render(request, 'main_app/organization_profile.html', {'u_info': u_info})
-    return render(request, 'main_app/organization_profile.html')
+    uid = request.user.id
+    user = User.objects.get(id=uid)
+    u_info = UsersInf.objects.get(user=user)
+    return render(request, 'main_app/organization_profile.html', {'u_info': u_info})
+
+
+@login_required
+def organization_profile_editor(request):
+    uid = request.user.id
+    user = User.objects.get(id=uid)
+    u_info = UsersInf.objects.get(user=user)
+    error_pass = request.GET.get("error_pass", "")
+    if request.method == "POST":
+        pass_edit = request.POST.get("pass_edit", "")
+        info_edit = request.POST.get("info_edit", "")
+        username = request.POST.get("username")
+        if pass_edit:
+            oldpassword = request.POST.get("old_password")
+            password = request.POST.get("new_password1")
+            password2 = request.POST.get("new_password2")
+            if password != password2 or password == '' or not user.check_password(str(oldpassword)):
+                return HttpResponseRedirect("/organization_profile_editor?error_pass=True")
+            else:
+                try:
+                    validate_password(password)
+                except ValidationError as vale:
+                    return render(request, 'main_app/organization_profile_editor.html',
+                                  {'u_info': u_info, 'error_pass': error_pass, 'vale': vale})
+                user.set_password(password)
+                user.save()
+                user = authenticate(username=username, password=password)
+                login(request, user)
+        if info_edit:
+            name = request.POST.get("name")
+            phone_number = request.POST.get("phone_number")
+            text_about = request.POST.get("text_about")
+            if name != '':
+                u_info.name = name
+            if phone_number != '':
+                u_info.phone_number = phone_number
+            if text_about != '':
+                u_info.text_about = text_about
+            u_info.save()
+    return render(request, 'main_app/organization_profile_editor.html', {'u_info': u_info, 'error_pass': error_pass})

@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block links %}
-    <link rel="stylesheet" href="{% static 'css/main_app/user_profile_editor.css' %}">
-{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/2.0.0-alpha.2/cropper.min.css" integrity="sha512-6QxSiaKfNSQmmqwqpTNyhHErr+Bbm8u8HHSiinMEz0uimy9nu7lc/2NaXJiUJj2y4BApd5vgDjSHyLzC8nP6Ng==" crossorigin="anonymous" referrerpolicy="no-referrer" />#}
+    <link rel="stylesheet" href="{% static 'css/main_app/organization_profile_editor.css' %}">
 {% endblock links %}
 {% block content %}
     <div class="container warp">
@@ -12,7 +11,7 @@
             {% endif %}
             <div class="formbox">
                 <h2 style="text-align: center;">Главная информация</h2><br>
-                <form class="mb-4" method="POST" enctype="multipart/form-data" action="/user_profile_editor/">
+                <form class="mb-4" method="POST" enctype="multipart/form-data" action="/organization_profile_editor/">
                     <input type="hidden" name="info_edit" value="True">
                     {% csrf_token %}
                     <div class="input-group flex-nowrap mb-4">
@@ -27,35 +26,14 @@
                             aria-describedby="addon-wrapping" required>
                     </div>
                     <div class="input-group flex-nowrap mb-4">
-                        <input id="surname" type="text" name="surname" value="{{ u_info.surname }}" class="textinput textInput  form-control formInput" placeholder="Фамилия" aria-label="surname"
-                            aria-describedby="addon-wrapping" required>
-                    </div>
-                    <div class="input-group flex-nowrap mb-4">
-                        <input id="patronymic" type="text" name="patronymic" value="{{ u_info.patronymic }}"  class="textinput textInput  form-control formInput" placeholder="Отчество" aria-label="patronymic"
-                            aria-describedby="addon-wrapping" required>
-                    </div>
-                    <div class="input-group flex-nowrap mb-4">
                         <div class="input-group-text formInput">
                             <i class="fas fa-phone"></i>
                         </div>
                         <input id="phone_number" type="tel" name="phone_number" value="{{ u_info.phone_number }}" class="textinput textInput  form-control formInput phone" placeholder="+7 999 999 99 99" aria-label="phone_number"
                             aria-describedby="addon-wrapping">
                     </div>
-                    <div class="input-group flex-nowrap mb-4">
-                        <input id="date_of_birth" type="date" name="date_of_birth" value="{{ u_info.date_of_birth|date:'Y-m-d' }}" class="textinput textInput  form-control formInput" aria-label="date_of_birth"
-                            aria-describedby="addon-wrapping" required>
-                    </div>
                     <div class="mb-4">
-                        <label for="avatar" class="form-label">Выберите аватар</label>
-                        <input id="avatar" name="avatar" class="form-control" type="file" accept="image/*" onchange="onFileSelected(event)">
-                    </div>
-                    <div class="mb-4">
-                        <div class="photo-box ms-auto me-auto">
-                            <img id="image" src="{{ u_info.image.url }}" alt="">
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="text_about" class="form-label">Обо мне</label>
+                        <label for="text_about" class="form-label">О нас</label>
                         <textarea id="text_about" name="text_about" class="form-control textInput" rows="5"  required>{{ u_info.text_about }}</textarea>
                     </div>
                     <button class="btn-styled link-btn">Сохранить</button>
@@ -74,7 +52,7 @@
             {% endif %}
             <div class="formbox">
                 <h2 style="text-align: center;">Смена пароля</h2><br>
-                <form action="/user_profile_editor/" method="POST">
+                <form action="/organization_profile_editor/" method="POST">
                     <input type="hidden" name="pass_edit" value="True">
                     {% csrf_token %}
                     <div class="input-group flex-nowrap mb-3">
@@ -106,7 +84,6 @@
 {% block scripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js" integrity="sha512-KaIyHb30iXTXfGyI9cyKFUIRSSuekJt6/vqXtyQKhQP6ozZEGY8nOtRS6fExqE4+RbYHus2yGyYg1BrqxzV6YA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{% static 'js/cleave-phone.i18n.js' %}"></script>
-{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/2.0.0-alpha.2/cropper.min.js" integrity="sha512-IlZV3863HqEgMeFLVllRjbNOoh8uVj0kgx0aYxgt4rdBABTZCl/h5MfshHD9BrnVs6Rs9yNN7kUQpzhcLkNmHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>#}
     <script>
         const cleave = new Cleave('.phone', {
             phone: true,
@@ -114,19 +91,4 @@
         });
     </script>
 
-    <script>
-        function onFileSelected(event) {
-            const selectedFile = event.target.files[0];
-            const reader = new FileReader();
-
-            const imgtag = document.getElementById("image");
-            imgtag.title = selectedFile.name;
-
-            reader.onload = function(event) {
-                imgtag.src = event.target.result;
-            };
-
-            reader.readAsDataURL(selectedFile);
-        }
-    </script>
 {% endblock scripts %}
