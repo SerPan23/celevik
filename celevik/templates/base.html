@@ -32,7 +32,8 @@
                       <li><a href="/logout" class="dropdown-item logout-link">Выйти</a></li>
                   {% else %}
                       <li><a href="/organization_profile/{{ request.user.id }}" class="dropdown-item">Наш профиль</a></li>
-                      <li><a href="/organization_profile_editor" class="dropdown-item">Редактировать</a></li>
+                      <li><a href="/organization_profile_editor/" class="dropdown-item">Редактировать</a></li>
+                      <li><a href="/add_vacancy/" class="dropdown-item">Добавить вакансию</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a href="/logout" class="dropdown-item logout-link">Выйти</a></li>
                   {% endif %}

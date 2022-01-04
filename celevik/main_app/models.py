@@ -31,7 +31,7 @@ class Vacancy(models.Model):
     organisation = models.OneToOneField(User, on_delete=models.CASCADE, null=True,
                                         default='',
                                         verbose_name="Связь с таблицей пользователей", related_name="organisation")
-    partners = models.TextField("Список Партнеров", null=True, default='')
+    partners = models.TextField("Список вузов партнеров", null=True, default='')
     description = models.TextField("Описание вакансии", default='')
     requirements = models.TextField("Требования к соискателю", default='')
     title = models.CharField("Название", default='', null=True, blank=True, max_length=250)

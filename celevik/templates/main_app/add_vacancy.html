@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/slimselect.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main_app/add_vacancy.css' %}">
+{% endblock links %}
+{% block content %}
+    <div class="container warp">
+        <div class="box mb-5">
+            {% if form.errors %}
+                <p style="color: red;">Ошибка</p>
+            {% endif %}
+            <div class="formbox">
+                <h2 style="text-align: center;">Форма добавление новой вакансии</h2><br>
+                <form class="mb-4" method="POST" enctype="multipart/form-data" action="/add_vacancy/">
+                    {% if vacancy %}
+                        <input type="hidden" name="edit" value="True">
+                        <input type="hidden" name="vacancy_id" value="{{ vacancy.id }}">
+                    {% else %}
+                        <input type="hidden" name="edit" value="False">
+                    {% endif %}
+                    {% csrf_token %}
+                    <div class="input-group flex-nowrap mb-4">
+                        <input value="{{ vacancy.title }}" id="title" type="text" name="title" class="textinput textInput  form-control formInput" placeholder="Название" aria-label="name"
+                            aria-describedby="addon-wrapping" required>
+                    </div>
+                    <div class="mb-4">
+                        <select id="multiple" class="formInput partners-select" multiple>
+                            <option value="МГТУ им.Баумана">МГТУ им.Баумана</option>
+                            <option value="МФТИ">МФТИ</option>
+                            <option value="МИСИС">МИСИС</option>
+                        </select>
+                        <input type="hidden" id="partners" name="partners" value="">
+                    </div>
+                    <div class="mb-4">
+                        <label for="description" class="form-label">Описание вакансии</label>
+                        <textarea id="description" name="description" class="form-control textInput" rows="5"  required>{{ vacancy.description }}</textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="requirements" class="form-label">Требования к соискателю</label>
+                        <textarea id="requirements" name="requirements" class="form-control textInput" rows="5"  required>{{ vacancy.requirements }}</textarea>
+                    </div>
+                    <button class="btn-styled link-btn">Сохранить</button>
+                </form>
+            </div>
+         </div>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="{% static 'js/slimselect.min.js' %}"></script>
+
+    <script>
+    var select = new SlimSelect({
+        select: '#multiple',
+        closeOnSelect: false,
+        searchText: 'Нет результатов',
+        placeholder: 'Выберите вузы партнеры',
+        hideSelectedOption: true,
+        onChange: (info) => {
+            {#console.log(select.selected().join('|'))#}
+            document.getElementById("partners").value = select.selected().join('|');
+        }
+    })
+    </script>
+{% endblock scripts %}

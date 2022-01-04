@@ -184,3 +184,8 @@ def organization_profile_editor(request):
 def vacancy_page(request, pk):
     vacancy = Vacancy.objects.get(id=pk)
     return render(request, 'main_app/vacancy_page.html', {"vacancy": vacancy})
+
+
+@login_required
+def add_vacancy(request):
+    return render(request, 'main_app/add_vacancy.html')

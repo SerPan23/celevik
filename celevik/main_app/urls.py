@@ -12,4 +12,5 @@ urlpatterns = [
     path('organization_profile/<int:pk>/', views.organization_profile),
     path('organization_profile_editor/', views.organization_profile_editor),
     path('vacancy/<int:pk>/', views.vacancy_page),
+    path('add_vacancy/', views.add_vacancy),
 ]

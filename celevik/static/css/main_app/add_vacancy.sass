@@ -1,0 +1,36 @@
+@import "../main"
+
+.warp
+    padding: 170px 30px 0px !important
+
+
+.partners-select
+    font-size: 1rem
+    .ss-multi-selected
+        padding: 5px 10px
+        border-radius: 30px
+    .ss-multi-selected
+        padding: 5px 15px
+    .ss-value-text
+        color: $white
+        font-size: 1rem
+    .ss-value-delete
+        color: $dangerColor
+        font-size: 1rem
+    .ss-multi-selected .ss-add .ss-plus
+        display: flex
+        justify-content: center
+        align-items: center
+        background: $white
+        position: relative
+        height: 18px
+        width: 4px
+        transition: transform .2s
+        &:after
+            background: $white
+            content: ""
+            position: absolute
+            height: 4px
+            width: 18px
+            left: -7px
+            top: 7px
