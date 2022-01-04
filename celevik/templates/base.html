@@ -25,13 +25,13 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
                   {% if request.user.user_info.role == "Entrant" %}
-                      <li><a href="/user_profile" class="dropdown-item">Мой профиль</a></li>
+                      <li><a href="/user_profile/{{ request.user.id }}" class="dropdown-item">Мой профиль</a></li>
                       <li><a href="/user_profile_editor" class="dropdown-item">Редактировать</a></li>
                       <li><a href="#" class="dropdown-item">Мои вакансии</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a href="/logout" class="dropdown-item logout-link">Выйти</a></li>
                   {% else %}
-                      <li><a href="/organization_profile" class="dropdown-item">Наш профиль</a></li>
+                      <li><a href="/organization_profile/{{ request.user.id }}" class="dropdown-item">Наш профиль</a></li>
                       <li><a href="/organization_profile_editor" class="dropdown-item">Редактировать</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a href="/logout" class="dropdown-item logout-link">Выйти</a></li>
