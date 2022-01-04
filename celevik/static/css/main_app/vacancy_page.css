@@ -129,15 +129,12 @@ nav {
   padding-top: 100px; }
 
 .box .organisation {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 500;
   font-style: italic;
-  color: #424347; }
-  .box .organisation:hover {
-    color: #176DEA; }
+  color: #176DEA; }
 .box .partners {
-  color: #424347;
-  font-size: 1.1rem; }
+  font-size: 1.15rem; }
   .box .partners .partner {
     color: #7A7DF5; }
 

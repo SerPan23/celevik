@@ -9,13 +9,14 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from .models import UsersInf
+from .models import UsersInf, Vacancy
 from celevik import settings
 
 
 # Create your views here.
 def index(request):
-    return render(request, 'main_app/index.html')
+    vacancies = Vacancy.objects.all()
+    return render(request, 'main_app/index.html', {'vacancies': vacancies})
 
 
 def registration(request):
@@ -70,7 +71,6 @@ def account_confirmed(request):
             return HttpResponseRedirect("/account_confirmation?username=" + username + "&error=True")
 
 
-@login_required
 def user_profile(request, pk):
     # pk = request.user.id
     user = User.objects.get(id=pk)
@@ -131,14 +131,14 @@ def user_profile_editor(request):
     return render(request, 'main_app/user_profile_editor.html', {'u_info': u_info, 'error_pass': error_pass})
 
 
-@login_required
 def organization_profile(request, pk):
     # pk = request.user.id
     user = User.objects.get(id=pk)
     u_info = UsersInf.objects.get(user=user)
+    vacancies = Vacancy.objects.filter(organisation=user)
     if u_info.role == 'Entrant':
         return HttpResponseRedirect("/user_profile/" + str(pk) + "/")
-    return render(request, 'main_app/organization_profile.html', {'u_info': u_info})
+    return render(request, 'main_app/organization_profile.html', {'u_info': u_info, 'vacancies': vacancies})
 
 
 @login_required
@@ -181,5 +181,6 @@ def organization_profile_editor(request):
     return render(request, 'main_app/organization_profile_editor.html', {'u_info': u_info, 'error_pass': error_pass})
 
 
-def vacancy_page(request):
-    return render(request, 'main_app/vacancy_page.html')
+def vacancy_page(request, pk):
+    vacancy = Vacancy.objects.get(id=pk)
+    return render(request, 'main_app/vacancy_page.html', {"vacancy": vacancy})

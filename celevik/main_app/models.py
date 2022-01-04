@@ -35,3 +35,6 @@ class Vacancy(models.Model):
     description = models.TextField("Описание вакансии", default='')
     requirements = models.TextField("Требования к соискателю", default='')
     title = models.CharField("Название", default='', null=True, blank=True, max_length=250)
+
+    def __str__(self):
+        return '{} {}'.format(self.organisation.email, self.title)

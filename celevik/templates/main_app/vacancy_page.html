@@ -1,26 +1,29 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
 {% block links %}
 <link rel="stylesheet" href="{% static 'css/main_app/vacancy_page.css' %}">
 {% endblock links %}
 {% block content %}
     <div class="container warp">
         <div class="box">
-            <h3 class="title">Специальность 03.03.01 — «Прикладные математика и физика»</h3>
-            <a href="/organization_profile/" class="organisation">ООО "Рога"</a>
+            <h3 class="title">{{ vacancy.title }}</h3>
+            <a href="/organization_profile/{{ vacancy.organisation.id }}" class="organisation link">ООО "Рога"</a>
             <div class="partners mb-3">
                 <span>Вузы партнеры: </span>
-                <span class="partner">МГТУ им.Баумана</span>,
-                <span class="partner">МФТИ</span>,
-                <span class="partner">МИСИС</span>
+                {% with vacancy.partners|split:"|" as partners %}
+                    {% for p in partners %}
+                        <span class="partner">{{ p }}</span>{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                {% endwith %}
             </div>
             <div class="description mb-3">
                 <h5>Описание:</h5>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies felis vitae arcu interdum malesuada non sed orci. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin sed luctus lorem. Curabitur eget tincidunt orci. Aenean finibus mauris in porta viverra. Suspendisse semper lorem commodo, pulvinar dolor at, pretium tellus. Mauris a neque non orci cursus vulputate sed at arcu. Mauris viverra elementum malesuada. Proin sit amet pellentesque leo. Sed hendrerit cursus risus volutpat scelerisque. Donec dolor nisl, elementum sed quam vitae, elementum varius augue. Donec ullamcorper semper felis, vel ultrices sapien venenatis sed. Ut viverra.
+                {{ vacancy.description }}
             </div>
             <div class="requirements mb-3">
                 <h5>Требования:</h5>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pharetra tortor ac nisl lobortis, ut dictum tortor bibendum. Proin pellentesque sagittis nunc, maximus dictum mi mattis ac. Suspendisse dapibus condimentum ante, eget lobortis nisl rutrum ut. Nulla ornare lectus at dui malesuada, nec elementum libero rutrum. Sed a fermentum justo
+                {{ vacancy.requirements }}
             </div>
         </div>
     </div>
