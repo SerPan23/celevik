@@ -130,4 +130,5 @@ dmypy.json
 
 celevik_old/
 celevik/.idea/workspace.xml
-celevik/.idea/workspace.xml
+celevik/.idea/
+workspace.xml

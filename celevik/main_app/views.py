@@ -179,3 +179,7 @@ def organization_profile_editor(request):
                 u_info.text_about = text_about
             u_info.save()
     return render(request, 'main_app/organization_profile_editor.html', {'u_info': u_info, 'error_pass': error_pass})
+
+
+def vacancy_page(request):
+    return render(request, 'main_app/vacancy_page.html')

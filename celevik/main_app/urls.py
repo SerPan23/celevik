@@ -11,4 +11,5 @@ urlpatterns = [
     path('user_profile_editor/', views.user_profile_editor),
     path('organization_profile/<int:pk>/', views.organization_profile),
     path('organization_profile_editor/', views.organization_profile_editor),
+    path('vacancy/', views.vacancy_page),
 ]

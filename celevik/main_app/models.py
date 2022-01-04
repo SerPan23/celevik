@@ -34,3 +34,4 @@ class Vacancy(models.Model):
     partners = models.TextField("Список Партнеров", null=True, default='')
     description = models.TextField("Описание вакансии", default='')
     requirements = models.TextField("Требования к соискателю", default='')
+    title = models.CharField("Название", default='', null=True, blank=True, max_length=250)
