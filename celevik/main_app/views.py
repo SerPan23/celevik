@@ -71,10 +71,12 @@ def account_confirmed(request):
 
 
 @login_required
-def user_profile(request):
-    uid = request.user.id
-    user = User.objects.get(id=uid)
+def user_profile(request, pk):
+    # pk = request.user.id
+    user = User.objects.get(id=pk)
     u_info = UsersInf.objects.get(user=user)
+    if u_info.role == 'Company':
+        return HttpResponseRedirect("/organization_profile/" + str(pk) + "/")
     return render(request, 'main_app/user_profile.html', {'u_info': u_info})
 
 
@@ -130,10 +132,12 @@ def user_profile_editor(request):
 
 
 @login_required
-def organization_profile(request):
-    uid = request.user.id
-    user = User.objects.get(id=uid)
+def organization_profile(request, pk):
+    # pk = request.user.id
+    user = User.objects.get(id=pk)
     u_info = UsersInf.objects.get(user=user)
+    if u_info.role == 'Entrant':
+        return HttpResponseRedirect("/user_profile/" + str(pk) + "/")
     return render(request, 'main_app/organization_profile.html', {'u_info': u_info})
 
 
