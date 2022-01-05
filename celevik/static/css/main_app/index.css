@@ -61,7 +61,9 @@ nav {
     font-size: 1.1rem; }
 
 .vacancy-card {
-  min-height: 300px;
+  position: relative;
+  min-height: 320px;
+  max-height: 320px;
   box-shadow: 0 2px 66px rgba(125, 143, 179, 0.15);
   border-radius: 12px;
   min-width: 100%;
@@ -69,20 +71,34 @@ nav {
   padding: 15px 10px;
   text-align: center; }
   .vacancy-card .name {
-    color: #292C33; }
+    color: #292C33;
+    max-height: 75px;
+    min-height: 75px;
+    overflow: hidden; }
   .vacancy-card .description {
     margin-top: 20px;
+    max-height: 100px;
+    min-height: 100px;
+    overflow: hidden;
     color: #424347; }
   .vacancy-card .partners {
     margin-top: 15px;
+    max-height: 50px;
+    min-height: 50px;
+    overflow: hidden;
     color: #424347; }
     .vacancy-card .partners .partner {
       color: #7A7DF5; }
   .vacancy-card .more-detailed {
-    margin-top: 15px;
     text-decoration: underline;
     color: #424347;
-    user-select: none; }
+    user-select: none;
+    display: block;
+    position: absolute;
+    bottom: 15px;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%); }
 
 .btn-styled {
   padding: 0.3em 1.4em;

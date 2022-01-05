@@ -188,4 +188,27 @@ def vacancy_page(request, pk):
 
 @login_required
 def add_vacancy(request):
+    if request.method == "POST":
+        edit = request.POST.get("edit", "")
+        title = request.POST.get("title", "")
+        partners = request.POST.get("partners", "")
+        description = request.POST.get("description", "")
+        requirements = request.POST.get("requirements", "")
+        if edit == "True":
+            vacancy_id = request.POST.get("vacancy_id", "")
+            vacancy = Vacancy.objects.get(id=vacancy_id)
+            vacancy.title = title
+            vacancy.partners = partners
+            vacancy.description = description
+            vacancy.requirements = requirements
+            vacancy.save()
+        else:
+            uid = request.user.id
+            organisation = User.objects.get(id=uid)
+            vacancy = Vacancy.objects.create(organisation=organisation)
+            vacancy.title = title
+            vacancy.partners = partners
+            vacancy.description = description
+            vacancy.requirements = requirements
+            vacancy.save()
     return render(request, 'main_app/add_vacancy.html')

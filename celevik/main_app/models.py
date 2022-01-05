@@ -28,9 +28,9 @@ class UsersInf(models.Model):
 
 
 class Vacancy(models.Model):
-    organisation = models.OneToOneField(User, on_delete=models.CASCADE, null=True,
-                                        default='',
-                                        verbose_name="Связь с таблицей пользователей", related_name="organisation")
+    organisation = models.ForeignKey(User, on_delete=models.CASCADE, null=True,
+                                     default='',
+                                     verbose_name="Связь с таблицей пользователей", related_name="organisation")
     partners = models.TextField("Список вузов партнеров", null=True, default='')
     description = models.TextField("Описание вакансии", default='')
     requirements = models.TextField("Требования к соискателю", default='')
