@@ -13,4 +13,6 @@ urlpatterns = [
     path('organization_profile_editor/', views.organization_profile_editor),
     path('vacancy/<int:pk>/', views.vacancy_page),
     path('add_vacancy/', views.add_vacancy),
+    path('del_vacancy/<int:pk>/', views.del_vacancy),
+    path('respond/<int:pk>/', views.respond),
 ]

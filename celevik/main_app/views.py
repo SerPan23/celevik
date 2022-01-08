@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from .models import UsersInf, Vacancy
+from .models import UsersInf, Vacancy, Responses
 from celevik import settings
 
 
@@ -183,11 +183,19 @@ def organization_profile_editor(request):
 
 def vacancy_page(request, pk):
     vacancy = Vacancy.objects.get(id=pk)
-    return render(request, 'main_app/vacancy_page.html', {"vacancy": vacancy})
+    responses = Responses.objects.filter(vacancy=vacancy)
+    is_respond = False
+    if request.user.is_authenticated and responses.filter(user=request.user).exists():
+        is_respond = True
+    return render(request, 'main_app/vacancy_page.html', {"vacancy": vacancy, "responses": responses, "is_respond": is_respond})
 
 
 @login_required
 def add_vacancy(request):
+    edit_id = request.GET.get("edit_id", "")
+    if edit_id:
+        vacancy = Vacancy.objects.get(id=edit_id)
+        return render(request, 'main_app/add_vacancy.html', {"vacancy": vacancy})
     if request.method == "POST":
         edit = request.POST.get("edit", "")
         title = request.POST.get("title", "")
@@ -202,6 +210,7 @@ def add_vacancy(request):
             vacancy.description = description
             vacancy.requirements = requirements
             vacancy.save()
+            return HttpResponseRedirect("/vacancy/" + str(vacancy_id) + "/")
         else:
             uid = request.user.id
             organisation = User.objects.get(id=uid)
@@ -211,4 +220,21 @@ def add_vacancy(request):
             vacancy.description = description
             vacancy.requirements = requirements
             vacancy.save()
+            return HttpResponseRedirect("/vacancy/" + str(vacancy.id) + "/")
     return render(request, 'main_app/add_vacancy.html')
+
+
+@login_required
+def del_vacancy(request, pk):
+    vacancy = Vacancy.objects.get(id=pk)
+    vacancy.delete()
+    return HttpResponseRedirect("/")
+
+
+@login_required
+def respond(request, pk):
+    vacancy = Vacancy.objects.get(id=pk)
+    user = User.objects.get(id=request.user.id)
+    response = Responses.objects.create(vacancy=vacancy, user=user)
+    response.save()
+    return HttpResponseRedirect("/vacancy/"+str(pk)+"/")

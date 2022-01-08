@@ -104,7 +104,8 @@ nav {
   padding: 0.3em 1.4em;
   transition: box-shadow 0.1s;
   box-shadow: 0 0 0 3px transparent;
-  font-weight: 500; }
+  font-weight: 500;
+  user-select: none; }
   .btn-styled[disabled] {
     opacity: 0.4; }
   .btn-styled:hover {
@@ -153,5 +154,21 @@ nav {
   font-size: 1.15rem; }
   .box .partners .partner {
     color: #7A7DF5; }
+.box .response {
+  border: 1px solid #424347;
+  border-radius: 12px;
+  padding: 10px 5px; }
+  .box .response .row {
+    max-width: 100%;
+    padding: 0;
+    margin: 0; }
+  .box .response .full_name, .box .response .email {
+    font-weight: 500;
+    font-size: 1.2rem; }
+.box .f-btn {
+  font-weight: 500;
+  font-size: 1.1rem; }
+  .box .f-btn.del {
+    color: #BB2124; }
 
 /*# sourceMappingURL=vacancy_page.css.map */

@@ -6,7 +6,12 @@
 {% endblock links %}
 {% block content %}
     <div class="container warp">
-        <div class="box">
+        <div class="box mb-3">
+            {% if user.is_authenticated and request.user.id == vacancy.organisation.id %}
+                <a class="f-btn me-2" href="/add_vacancy/?edit_id={{ vacancy.id }}">Редактировать</a>
+                <a class="f-btn del" onclick="del_confirm()">Удалить</a>
+                <hr>
+            {% endif %}
             <h3 class="title">{{ vacancy.title }}</h3>
             <a href="/organization_profile/{{ vacancy.organisation.id }}" class="organisation link">{{ vacancy.organisation.user_info.name }}</a>
             <div class="partners mb-3">
@@ -25,9 +30,59 @@
                 <h5>Требования:</h5>
                 {{ vacancy.requirements }}
             </div>
+            <hr>
+            {% if user.is_authenticated %}
+                <div class="btns">
+                    {% if request.user.user_info.role == "Entrant" %}
+                        {% if is_respond %}
+                            <a class="btn-styled link-btn" disabled>Вы уже откликнулись</a>
+                        {% else %}
+                            <a class="btn-styled link-btn" href="/respond/{{ vacancy.id }}">Откликнуться</a>
+                        {% endif %}
+                    {% else %}
+                        <h5 class="mb-2">Соискатели:</h5>
+                        {% for r in responses %}
+                            <div class="response mt-2">
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-5 mb-1 mb-md-0 full_name">
+                                        <a href="/user_profile/{{ r.user.id }}/" class="link">
+                                            {{ r.user.user_info.surname }} {{ r.user.user_info.name }} {{ r.user.user_info.patronymic }}
+                                        </a>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 mb-2 mb-md-0 email">{{ r.user.email }}</div>
+                                    <div class="col-12 col-lg-3">
+                                        <a class="btn-styled link-btn">Подтвердить</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <h5>Пока никто не откликнулся</h5>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% else %}
+                <h5>Авторизуйтесь, чтобы откликнуться</h5>
+            {% endif %}
         </div>
     </div>
 {% endblock content %}
 
 {% block scripts %}
+    <script>
+        function del_confirm() {
+            Swal.fire({
+              title: 'Вы уверен?',
+              text: "Вы не сможете это исправить!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Да, удалить!'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                  window.location.href = "/del_vacancy/{{ vacancy.id }}/"
+              }
+            })
+        }
+    </script>
 {% endblock scripts %}

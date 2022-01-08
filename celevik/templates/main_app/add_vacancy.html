@@ -11,7 +11,11 @@
                 <p style="color: red;">Ошибка</p>
             {% endif %}
             <div class="formbox">
-                <h2 style="text-align: center;">Форма добавление новой вакансии</h2><br>
+                {% if vacancy %}
+                    <h2 style="text-align: center;">Форма редактирования вакансии</h2><br>
+                {% else %}
+                    <h2 style="text-align: center;">Форма добавление новой вакансии</h2><br>
+                {% endif %}
                 <form class="mb-4" method="POST" enctype="multipart/form-data" action="/add_vacancy/">
                     {% if vacancy %}
                         <input type="hidden" name="edit" value="True">
@@ -62,5 +66,7 @@
             document.getElementById("partners").value = select.selected().join('|');
         }
     })
+    let d = "{{ vacancy.partners }}".split('|')
+    select.set(d)
     </script>
 {% endblock scripts %}
