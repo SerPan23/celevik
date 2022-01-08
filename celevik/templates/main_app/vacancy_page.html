@@ -8,7 +8,7 @@
     <div class="container warp">
         <div class="box">
             <h3 class="title">{{ vacancy.title }}</h3>
-            <a href="/organization_profile/{{ vacancy.organisation.id }}" class="organisation link">ООО "Рога"</a>
+            <a href="/organization_profile/{{ vacancy.organisation.id }}" class="organisation link">{{ vacancy.organisation.user_info.name }}</a>
             <div class="partners mb-3">
                 <span>Вузы партнеры: </span>
                 {% with vacancy.partners|split:"|" as partners %}
