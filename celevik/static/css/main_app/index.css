@@ -147,5 +147,10 @@ nav {
   min-height: 420px;
   background: #F8F9FA;
   margin-bottom: 20px; }
+  .search-box .sort-box {
+    min-height: 410px;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
 
 /*# sourceMappingURL=index.css.map */
