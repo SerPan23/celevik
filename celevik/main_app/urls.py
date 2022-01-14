@@ -15,4 +15,5 @@ urlpatterns = [
     path('add_vacancy/', views.add_vacancy),
     path('del_vacancy/<int:pk>/', views.del_vacancy),
     path('respond/<int:pk>/', views.respond),
+    path('user_vacancies_list/', views.user_vacancies_list),
 ]

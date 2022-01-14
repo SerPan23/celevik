@@ -81,6 +81,13 @@ def user_profile(request, pk):
 
 
 @login_required
+def user_vacancies_list(request):
+    user = User.objects.get(id=request.user.id)
+    responses = Responses.objects.filter(user=user)
+    return render(request, 'main_app/user_vacancies_list.html', {'responses': responses})
+
+
+@login_required
 def user_profile_editor(request):
     uid = request.user.id
     user = User.objects.get(id=uid)

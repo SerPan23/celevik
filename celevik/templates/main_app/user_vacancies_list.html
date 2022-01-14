@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/main_app/user_vacancies_list.css' %}">
+{% endblock links %}
+{% block content %}
+    <div class="container warp">
+        <h2 class="text-center mb-5">Вакансии на которые Вы откликнулись:</h2>
+        <div class="row">
+            {% for response in responses %}
+                <div class="col-12 col-md-6 col-lg-4 col-xxl-3 mb-5">
+                    <div class="vacancy-card">
+                        <h5 class="name">{{ response.vacancy.title }}</h5>
+                        <p class="description">{{ response.vacancy.description|truncatechars:120 }}</p>
+                        <p class="partners">
+                            <span>Вузы партнеры: </span>
+                            {% with response.vacancy.partners|split:"|" as partners %}
+                                {% for p in partners %}
+                                    <span class="partner">{{ p }}</span>{% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                            {% endwith %}
+                        </p>
+                        <a href="/vacancy/{{ response.vacancy.id }}" class="more-detailed">Подробнее</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}
