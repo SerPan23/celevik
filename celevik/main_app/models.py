@@ -44,6 +44,6 @@ class Responses(models.Model):
     vacancy = models.ForeignKey(Vacancy, on_delete=models.CASCADE, null=True,
                                 default='',
                                 verbose_name="Связь с таблицей вакансии", related_name="vacancy")
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True,
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True,
                                 default='',
                                 verbose_name="Связь с таблицей пользователей")
