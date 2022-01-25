@@ -7,6 +7,7 @@ class UsersInf(models.Model):
     ROLE_CHOICES = (
         ('Entrant', 'Абитуриент'),
         ('Company', 'Компания'),
+        ('Admin', 'Админ'),
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True,
