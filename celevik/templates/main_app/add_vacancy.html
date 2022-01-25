@@ -25,14 +25,20 @@
                     {% endif %}
                     {% csrf_token %}
                     <div class="input-group flex-nowrap mb-4">
-                        <input value="{{ vacancy.title }}" id="title" type="text" name="title" class="textinput textInput  form-control formInput" placeholder="Название" aria-label="name"
-                            aria-describedby="addon-wrapping" required>
+{#                        <input value="{{ vacancy.title }}" id="title" type="text" name="title" class="textinput textInput  form-control formInput" placeholder="Название" aria-label="name"#}
+{#                            aria-describedby="addon-wrapping" required>#}
+                        <input value="{{ vacancy.title }}" name="title" class="textinput textInput  form-control formInput" list="dir_datalist" id="title" placeholder="Введите для поиска...">
+                        <datalist id="dir_datalist">
+                            {% for direction in directions %}
+                                <option value="Специальность {{ direction.code }} — «{{ direction.title }}»">
+                            {% endfor %}
+                        </datalist>
                     </div>
                     <div class="mb-4">
                         <select id="multiple" class="formInput partners-select" multiple>
-                            <option value="МГТУ им.Баумана">МГТУ им.Баумана</option>
-                            <option value="МФТИ">МФТИ</option>
-                            <option value="МИСИС">МИСИС</option>
+                            {% for university in universities %}
+                                <option value="{{ university.title }}">{{ university.title }}</option>
+                            {% endfor %}
                         </select>
                         <input type="hidden" id="partners" name="partners" value="">
                     </div>

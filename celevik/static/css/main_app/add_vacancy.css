@@ -145,6 +145,10 @@ nav {
 .warp {
   padding: 170px 30px 0px !important; }
 
+.input-group:not(.has-validation) > .dropdown-toggle:nth-last-child(n+3), .input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu) {
+  border-top-right-radius: 30px !important;
+  border-bottom-right-radius: 30px !important; }
+
 .partners-select {
   font-size: 1rem; }
   .partners-select .ss-multi-selected {

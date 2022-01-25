@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from .models import UsersInf, Vacancy, Responses
+from .models import UsersInf, Vacancy, Responses, Universities, Direction
 from celevik import settings
 
 
@@ -200,9 +200,11 @@ def vacancy_page(request, pk):
 @login_required
 def add_vacancy(request):
     edit_id = request.GET.get("edit_id", "")
+    universities = Universities.objects.all()
+    directions = Direction.objects.all()
     if edit_id:
         vacancy = Vacancy.objects.get(id=edit_id)
-        return render(request, 'main_app/add_vacancy.html', {"vacancy": vacancy})
+        return render(request, 'main_app/add_vacancy.html', {"vacancy": vacancy, "universities": universities, "directions": directions})
     if request.method == "POST":
         edit = request.POST.get("edit", "")
         title = request.POST.get("title", "")
@@ -228,7 +230,7 @@ def add_vacancy(request):
             vacancy.requirements = requirements
             vacancy.save()
             return HttpResponseRedirect("/vacancy/" + str(vacancy.id) + "/")
-    return render(request, 'main_app/add_vacancy.html')
+    return render(request, 'main_app/add_vacancy.html', {"universities": universities, "directions": directions})
 
 
 @login_required

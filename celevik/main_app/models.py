@@ -47,3 +47,18 @@ class Responses(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True,
                                 default='',
                                 verbose_name="Связь с таблицей пользователей")
+
+
+class Universities(models.Model):
+    title = models.CharField("Название вуза", default='', null=True, blank=True, max_length=250)
+
+    def __str__(self):
+        return '{}'.format(self.title)
+
+
+class Direction(models.Model):
+    title = models.CharField("Название специальности", default='', null=True, blank=True, max_length=250)
+    code = models.CharField("Код специальности", default='', null=True, blank=True, max_length=250)
+
+    def __str__(self):
+        return '{} {}'.format(self.code, self.title)
