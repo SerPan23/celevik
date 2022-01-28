@@ -247,3 +247,17 @@ def respond(request, pk):
     response = Responses.objects.create(vacancy=vacancy, user=user)
     response.save()
     return HttpResponseRedirect("/vacancy/"+str(pk)+"/")
+
+
+def applications_for_registration_list(request):
+    return render(request, 'main_app/applications_for_registration_list.html')
+
+
+def list_of_universities(request):
+    universities = Universities.objects.all()
+    return render(request, 'main_app/list_of_universities.html', {'universities': universities})
+
+
+def list_of_directions(request):
+    directions = Direction.objects.all()
+    return render(request, 'main_app/list_of_directions.html', {'directions': directions})

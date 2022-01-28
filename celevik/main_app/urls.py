@@ -16,4 +16,7 @@ urlpatterns = [
     path('del_vacancy/<int:pk>/', views.del_vacancy),
     path('respond/<int:pk>/', views.respond),
     path('user_vacancies_list/', views.user_vacancies_list),
+    path('applications_for_registration_list/', views.applications_for_registration_list),
+    path('list_of_universities/', views.list_of_universities),
+    path('list_of_directions/', views.list_of_directions),
 ]

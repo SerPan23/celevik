@@ -120,6 +120,12 @@ nav {
     background-color: #176DEA;
     color: #ffffff;
     font-size: 1.2em; }
+  .btn-styled.danger-btn {
+    border: 0;
+    border-radius: 70px;
+    background-color: #BB2124;
+    color: #ffffff;
+    font-size: 1.2em; }
   .btn-styled:focus {
     outline: none; }
   .btn-styled::-moz-focus-inner {

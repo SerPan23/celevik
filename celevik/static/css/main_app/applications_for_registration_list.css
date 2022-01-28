@@ -151,26 +151,16 @@ nav {
 .warp {
   padding: 170px 30px 0px !important; }
 
-.photo-box {
-  display: block;
-  border-radius: 400px; }
-  @media (max-width: 1023px) {
-    .photo-box {
-      max-width: 200px;
-      max-height: 200px; } }
-  @media (min-width: 1024px) {
-    .photo-box {
-      max-width: 450px;
-      max-height: 450px; } }
-  .photo-box img {
-    border-radius: 400px; }
-    @media (max-width: 1023px) {
-      .photo-box img {
-        width: 200px;
-        height: 200px; } }
-    @media (min-width: 1024px) {
-      .photo-box img {
-        width: 450px;
-        height: 450px; } }
+.box .organisation_application {
+  border: 1px solid #424347;
+  border-radius: 12px;
+  padding: 10px 5px; }
+  .box .organisation_application .row {
+    max-width: 100%;
+    padding: 0;
+    margin: 0; }
+  .box .organisation_application .name {
+    font-weight: 500;
+    font-size: 1.2rem; }
 
-/*# sourceMappingURL=user_profile_editor.css.map */
+/*# sourceMappingURL=applications_for_registration_list.css.map */

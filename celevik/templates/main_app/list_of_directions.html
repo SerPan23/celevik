@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/main_app/list_of_directions.css' %}">
+{% endblock links %}
+{% block content %}
+    <div class="container warp">
+        <div class="box">
+            <h2 style="text-align: center;">Список направлений:</h2><br>
+            {% for direction in directions %}
+                <div class="direction mb-3">
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-6 mb-2 mb-lg-0 name">
+                                Специальность {{ direction.code }} — «{{ direction.title }}»"
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3 text-lg-end mb-2 mb-md-0">
+                            <a class="btn-styled link-btn">Редактировать</a>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3 text-lg-end">
+                            <a class="btn-styled danger-btn">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}
