@@ -19,7 +19,7 @@ class UsersInf(models.Model):
     phone_number = models.CharField("Номер телефона", null=True, max_length=150)
     code = IntegerField("Код активации", null=False)
     surname = models.CharField("Фамилия", null=True, blank=True, max_length=150)
-    name = models.CharField("Имя", null=True, max_length=150)
+    name = models.CharField("Имя", null=True, max_length=250)
     patronymic = models.CharField("Отчество", null=True, blank=True, max_length=150)
     role = models.CharField("Статуc", choices=ROLE_CHOICES, default='Entrant', max_length=30)
     text_about = models.TextField("Текст о пользователе", default='')
@@ -63,3 +63,13 @@ class Direction(models.Model):
 
     def __str__(self):
         return '{} {}'.format(self.code, self.title)
+
+
+class CompanyRegApplication(models.Model):
+    name = models.CharField("Имя", null=True, max_length=250)
+    email = models.CharField("Email", null=True, max_length=250)
+    phone_number = models.CharField("Номер телефона", null=True, max_length=150)
+    text_about = models.TextField("Текст о пользователе", default='')
+
+    def __str__(self):
+        return 'Заявка от {}'.format(self.name)

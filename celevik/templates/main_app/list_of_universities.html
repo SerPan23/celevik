@@ -8,14 +8,14 @@
     <div class="container warp">
         <div class="box">
             {% csrf_token %}
-            <h2 style="text-align: center;">Список вузов:</h2><br>
-            <div class="row justify-content-center justify-content-md-end" style="width: 100%; margin: 0 0 1rem;">
+            <h2 style="text-align: center;">Список вузов:</h2>
+            <div class="row justify-content-center justify-content-md-end" style="width: 100%; margin: 1rem 0 0;">
                 <div class="col-12 col-md-6 text-center text-md-end">
                     <a class="btn-styled purple-btn" onclick="add()">Добавить вуз</a>
                 </div>
             </div>
             {% for university in universities %}
-                <div class="university mb-3">
+                <div class="university mt-3">
                     <div class="row">
                         <div class="col-12 col-md-12 col-lg-6 mb-2 mb-lg-0 name">
                             {{ university.title }}

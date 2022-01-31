@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/registration/company_reg.css' %}">
+{% endblock links %}
+
+{% block content %}
+            <div class="container warp">
+                <div class="box mt-auto mb-auto">
+                    <form class="formbox mb-4" method="POST" action="/company_reg/">
+                        {% csrf_token %}
+                        <h2 style="text-align: center;">Заявка на регистрацию компании</h2><br>
+                        <div class="input-group flex-nowrap mb-4">
+                            <input value="{{ u_info.name }}" id="name" type="text" name="name" class="textinput textInput  form-control formInput" placeholder="Название компании" aria-label="name"
+                                aria-describedby="addon-wrapping" required>
+                        </div>
+                        <div class="input-group flex-nowrap mb-4">
+                            <div class="input-group-text formInput">
+                                <i class="far fa-envelope"></i>
+                            </div>
+                            <input type="email" name="email" class="form-control formInput" placeholder="example@gmail.com" aria-label="email"
+                                aria-describedby="addon-wrapping" required>
+                        </div>
+                        <div class="input-group flex-nowrap mb-4">
+                            <div class="input-group-text formInput">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <input id="phone_number" type="tel" name="phone_number" value="{{ u_info.phone_number }}" class="textinput textInput  form-control formInput phone" placeholder="+7 999 999 99 99" aria-label="phone_number"
+                                aria-describedby="addon-wrapping">
+                        </div>
+                        <div class="mb-4">
+                            <label for="text_about" class="form-label">О нас</label>
+                            <textarea id="text_about" name="text_about" class="form-control textInput" rows="5"  required>{{ u_info.text_about }}</textarea>
+                        </div>
+                        <div class="form-check mb-4" style="text-align: left; margin: 0 0.5em">
+                            <input name="accessPrivacy" type="checkbox" class="form-check-input" id="accessPrivacy" required>
+                            <label class="form-check-label" for="accessPrivacy">Согласены с
+                                    <a href="#" class="links">политикой конфиденциальности</a>
+                            </label>
+                        </div>
+                        <button class="btn-styled link-btn" type="submit">Отправить заявку</button>
+                    </form>
+                </div>
+            </div>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js" integrity="sha512-KaIyHb30iXTXfGyI9cyKFUIRSSuekJt6/vqXtyQKhQP6ozZEGY8nOtRS6fExqE4+RbYHus2yGyYg1BrqxzV6YA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'js/cleave-phone.i18n.js' %}"></script>
+    <script>
+        const cleave = new Cleave('.phone', {
+            phone: true,
+            phoneRegionCode: 'RU'
+        });
+    </script>
+{% endblock scripts %}
+

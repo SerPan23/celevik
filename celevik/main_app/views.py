@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from .models import UsersInf, Vacancy, Responses, Universities, Direction
+from .models import UsersInf, Vacancy, Responses, Universities, Direction, CompanyRegApplication
 from celevik import settings
 
 
@@ -50,6 +50,18 @@ def registration(request):
 def generate_code():
     random.seed()
     return str(random.randint(10000, 99999999))
+
+
+def company_reg(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        phone_number = request.POST.get("phone_number")
+        text_about = request.POST.get("text_about")
+        application = CompanyRegApplication.objects.create(name=name, email=email, phone_number=phone_number,text_about=text_about)
+        application.save()
+        return HttpResponseRedirect("/")
+    return render(request, "registration/company_reg.html")
 
 
 def account_confirmation(request):
@@ -252,7 +264,8 @@ def respond(request, pk):
 
 
 def list_of_applications_for_registration(request):
-    return render(request, 'main_app/list_of_applications_for_registration.html')
+    applications = CompanyRegApplication.objects.all()
+    return render(request, 'main_app/list_of_applications_for_registration.html', {"applications": applications})
 
 
 def list_of_universities(request):

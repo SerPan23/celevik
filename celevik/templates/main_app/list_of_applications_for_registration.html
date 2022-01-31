@@ -7,22 +7,27 @@
 {% block content %}
     <div class="container warp">
         <div class="box">
-            <h2 style="text-align: center;">Заявки на регистарцию от компаний:</h2><br>
-            <div class="organisation_application mb-3">
-                <div class="row">
-                    <div class="col-12 col-md-12 col-lg-6 mb-2 mb-lg-0 name">
-                        <a href="/organization_profile/" class="link">
-                            ООО "Рога"
-                        </a>
+            <h2 style="text-align: center;">Заявки на регистрацию от компаний:</h2>
+            {% for application in applications %}
+                <div class="organisation_application mt-4">
+                    <div class="mb-3"><h3 class="text-center">Заявка от <strong>{{ application.name }}</strong></h3></div>
+                    <div class="row info mb-3">
+                        <div class="col-12 col-md-6 mb-3 mb-md-0">Email: {{ application.email }}</div>
+                        <div class="col-12 col-md-6">Телефон: {{ application.phone_number }}</div>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-3 text-lg-end mb-2 mb-md-0">
-                        <a class="btn-styled link-btn">Подтвердить</a>
+                    <div class="text-about-company mb-3">
+                        {{ application.text_about }}
                     </div>
-                    <div class="col-12 col-md-6 col-lg-3 text-lg-end">
-                        <a class="btn-styled danger-btn">Отклонить</a>
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-3 text-lg-start mb-2 mb-md-0">
+                            <a class="btn-styled link-btn">Одобрить</a>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3 text-lg-start">
+                            <a class="btn-styled danger-btn">Отклонить</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock content %}

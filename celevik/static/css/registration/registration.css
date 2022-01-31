@@ -162,15 +162,4 @@ nav {
   /* background-color: #fff; */
   padding: 170px 0 0 !important; }
 
-.box {
-  padding: 30px;
-  border-radius: 3px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 66px rgba(125, 143, 179, 0.15); }
-
-.link {
-  text-decoration: none; }
-  .link:hover {
-    color: #176DEA; }
-
 /*# sourceMappingURL=registration.css.map */
