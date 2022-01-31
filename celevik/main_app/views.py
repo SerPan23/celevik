@@ -251,8 +251,8 @@ def respond(request, pk):
     return HttpResponseRedirect("/vacancy/"+str(pk)+"/")
 
 
-def applications_for_registration_list(request):
-    return render(request, 'main_app/applications_for_registration_list.html')
+def list_of_applications_for_registration(request):
+    return render(request, 'main_app/list_of_applications_for_registration.html')
 
 
 def list_of_universities(request):
