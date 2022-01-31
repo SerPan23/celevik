@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.password_validation import validate_password
@@ -254,10 +256,45 @@ def applications_for_registration_list(request):
 
 
 def list_of_universities(request):
+    if request.method == "POST":
+        data = json.loads(request.body.decode("utf-8"))
+        if data["type"] == "edit":
+            id = data["id"]
+            text = data["text"]
+            university = Universities.objects.get(id=id)
+            university.title = text
+            university.save()
+        if data["type"] == "del":
+            id = data["id"]
+            university = Universities.objects.get(id=id)
+            university.delete()
+        if data["type"] == "add":
+            text = data["text"]
+            university = Universities.objects.create(title=text)
+            university.save()
     universities = Universities.objects.all()
     return render(request, 'main_app/list_of_universities.html', {'universities': universities})
 
 
 def list_of_directions(request):
+    if request.method == "POST":
+        data = json.loads(request.body.decode("utf-8"))
+        if data["type"] == "edit":
+            id = data["id"]
+            code = data["code"]
+            text = data["text"]
+            dir = Direction.objects.get(id=id)
+            dir.code = code
+            dir.title = text
+            dir.save()
+        if data["type"] == "del":
+            id = data["id"]
+            dir = Direction.objects.get(id=id)
+            dir.delete()
+        if data["type"] == "add":
+            text = data["text"]
+            code = data["code"]
+            university = Direction.objects.create(title=text, code=code)
+            university.save()
     directions = Direction.objects.all()
     return render(request, 'main_app/list_of_directions.html', {'directions': directions})

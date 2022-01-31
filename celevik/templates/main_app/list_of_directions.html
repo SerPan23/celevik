@@ -7,18 +7,24 @@
 {% block content %}
     <div class="container warp">
         <div class="box">
+            {% csrf_token %}
             <h2 style="text-align: center;">Список направлений:</h2><br>
+            <div class="row justify-content-center justify-content-md-end" style="width: 100%; margin: 0 0 1rem;">
+                <div class="col-12 col-md-6 text-center text-md-end">
+                    <a class="btn-styled purple-btn" onclick="add()">Добавить специальность</a>
+                </div>
+            </div>
             {% for direction in directions %}
                 <div class="direction mb-3">
                     <div class="row">
                         <div class="col-12 col-md-12 col-lg-6 mb-2 mb-lg-0 name">
-                                Специальность {{ direction.code }} — «{{ direction.title }}»"
+                                Специальность {{ direction.code }} — «{{ direction.title }}»
                         </div>
                         <div class="col-12 col-md-6 col-lg-3 text-lg-end mb-2 mb-md-0">
-                            <a class="btn-styled link-btn">Редактировать</a>
+                            <a class="btn-styled link-btn" onclick='edit({{ direction.id }}, "{{ direction.code }}", "{{ direction.title }}")'>Редактировать</a>
                         </div>
                         <div class="col-12 col-md-6 col-lg-3 text-lg-end">
-                            <a class="btn-styled danger-btn">Удалить</a>
+                            <a class="btn-styled danger-btn" onclick="del({{ direction.id }})">Удалить</a>
                         </div>
                     </div>
                 </div>
@@ -28,4 +34,138 @@
 {% endblock content %}
 
 {% block scripts %}
+    <script>
+        function edit(id, c, t) {
+            Swal.fire({
+                title: 'Редактировать название',
+                html:
+                      '<input id="swal-input1" style="margin: 1em 0 0; width: 97%" class="textinput textInput  form-control formInput modal-input" placeholder="Код специальности">' +
+                      '<input id="swal-input2" style="margin: 1em 0 0; width: 97%" class="textinput textInput  form-control formInput modal-input" placeholder="Название специальности">',
+                showCancelButton: true,
+                confirmButtonText: 'Сохранить',
+                cancelButtonText: 'Отмена',
+                showLoaderOnConfirm: true,
+                confirmButtonColor: '#7A7DF5',
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'swal2-confirm btn-styled purple-btn modal-btn me-2',
+                    cancelButton: 'swal2-cancel btn-styled grey-btn modal-btn',
+                },
+                willOpen: () => {
+                    document.getElementById('swal-input1').value = c
+                    document.getElementById('swal-input2').value = t
+                },
+                preConfirm: (text) => {
+                    let data = {
+                        'type': 'edit',
+                        'id': id,
+                        'code': document.getElementById('swal-input1').value,
+                        'text': document.getElementById('swal-input2').value,
+                    };
+                    let csrftoken = getCookie('csrftoken');
+                    return fetch('/list_of_directions/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8',
+                            'Accept': 'application/json',
+                            'X-CSRFToken': csrftoken,
+                        },
+                        mode: 'same-origin',
+                        body: JSON.stringify(data)
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if(result.isConfirmed)
+                    window.location.reload()
+            })
+        }
+        function del(id) {
+            Swal.fire({
+                title: 'Вы уверены?',
+                text: "Вы не сможете это исправить!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Удалить',
+                cancelButtonText: 'Отмена',
+                showLoaderOnConfirm: true,
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'swal2-confirm btn-styled danger-btn modal-btn me-2',
+                    cancelButton: 'swal2-cancel btn-styled grey-btn modal-btn',
+                },
+                preConfirm: () => {
+                    let data = {
+                        'type': 'del',
+                        'id': id,
+                    };
+                    let csrftoken = getCookie('csrftoken');
+                    return fetch('/list_of_directions/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8',
+                            'Accept': 'application/json',
+                            'X-CSRFToken': csrftoken,
+                        },
+                        mode: 'same-origin',
+                        body: JSON.stringify(data)
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if(result.isConfirmed)
+                {
+                    Swal.fire({
+                        title: 'Удаленно!',
+                        text: 'Направление удалено из списка',
+                        icon: 'success',
+                        buttonsStyling: false,
+                        customClass: {
+                            confirmButton: 'swal2-confirm btn-styled purple-btn modal-btn me-2',
+                        },
+                    }).then(() =>{
+                        window.location.reload()
+                    })
+                }
+            })
+        }
+        function add() {
+             Swal.fire({
+                 title: 'Добавление направления',
+                 html: '<input id="swal-input1" style="margin: 1em 0 0; width: 97%" class="textinput textInput  form-control formInput modal-input" placeholder="Код специальности">' +
+                      '<input id="swal-input2" style="margin: 1em 0 0; width: 97%" class="textinput textInput  form-control formInput modal-input" placeholder="Название специальности">',
+                 showCancelButton: true,
+                 confirmButtonText: 'Добавить',
+                 cancelButtonText: 'Отмена',
+                 showLoaderOnConfirm: true,
+                 buttonsStyling: false,
+                 customClass: {
+                     confirmButton: 'swal2-confirm btn-styled purple-btn modal-btn me-2',
+                     cancelButton: 'swal2-cancel btn-styled grey-btn modal-btn',
+                 },
+                 preConfirm: () => {
+                    let data = {
+                        'type': 'add',
+                        'code': document.getElementById('swal-input1').value,
+                        'text': document.getElementById('swal-input2').value,
+                    };
+                    let csrftoken = getCookie('csrftoken');
+                    return fetch('/list_of_directions/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8',
+                            'Accept': 'application/json',
+                            'X-CSRFToken': csrftoken,
+                        },
+                        mode: 'same-origin',
+                        body: JSON.stringify(data)
+                    })
+                 },
+                 allowOutsideClick: () => !Swal.isLoading()
+             }).then((result) => {
+                if(result.isConfirmed)
+                    window.location.reload()
+             })
+        }
+    </script>
 {% endblock scripts %}

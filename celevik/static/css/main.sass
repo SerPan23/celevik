@@ -10,7 +10,7 @@ $purpleColor: #7A7DF5
 $shadowColor: rgba(125,143,179,0.15)
 $dangerColor: #BB2124
 
-*
+*:not(.swal2-icon-content)
   font-family: "Roboto", sans-serif
   color: $textColor
 
@@ -131,21 +131,27 @@ nav
   user-select: none
   &:not([disabled])
     cursor: pointer
+  font-size: 1.2em
+  border: 0
+  border-radius: 70px
+  display: inline-block
+  &.modal-btn
+    font-size: 1.15rem
 
   &.link-btn
-    border: 0
-    border-radius: 70px
     background-color: $linkColor
     color: $white
-    font-size: 1.2em
     //&:focus
       //box-shadow: 0 0 0 3px rgba($linkColor, .5)
   &.danger-btn
-    border: 0
-    border-radius: 70px
     background-color: $dangerColor
     color: $white
-    font-size: 1.2em
+  &.purple-btn
+    background-color: $purpleColor
+    color: $white
+  &.grey-btn
+    background-color: $textColor2
+    color: $white
   &:focus
     outline: none
   &::-moz-focus-inner
@@ -159,6 +165,9 @@ nav
 .formInput
   border-radius: 30px
 
+.modal-input
+    font-size: 1.15rem
+
 .box
     padding: 30px
     border-radius: 3px
@@ -169,4 +178,3 @@ nav
     text-decoration: none
     &:hover
         color: $linkColor
-

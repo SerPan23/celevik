@@ -7,7 +7,13 @@
 {% block content %}
     <div class="container warp">
         <div class="box">
+            {% csrf_token %}
             <h2 style="text-align: center;">Список вузов:</h2><br>
+            <div class="row justify-content-center justify-content-md-end" style="width: 100%; margin: 0 0 1rem;">
+                <div class="col-12 col-md-6 text-center text-md-end">
+                    <a class="btn-styled purple-btn" onclick="add()">Добавить вуз</a>
+                </div>
+            </div>
             {% for university in universities %}
                 <div class="university mb-3">
                     <div class="row">
@@ -15,10 +21,10 @@
                             {{ university.title }}
                         </div>
                         <div class="col-12 col-md-6 col-lg-3 text-lg-end mb-2 mb-md-0">
-                            <a class="btn-styled link-btn">Редактировать</a>
+                            <a class="btn-styled link-btn" onclick='edit({{ university.id }}, "{{ university.title }}")'>Редактировать</a>
                         </div>
                         <div class="col-12 col-md-6 col-lg-3 text-lg-end">
-                            <a class="btn-styled danger-btn">Удалить</a>
+                            <a class="btn-styled danger-btn" onclick="del({{ university.id }})">Удалить</a>
                         </div>
                     </div>
                 </div>
@@ -28,4 +34,133 @@
 {% endblock content %}
 
 {% block scripts %}
+    <script>
+        function edit(id, t) {
+            Swal.fire({
+                title: 'Редактировать название',
+                 html:
+                      '<input id="swal-input1" style="margin: 1em 0 0; width: 97%" class="textinput textInput  form-control formInput modal-input" placeholder="Название университета">',
+                showCancelButton: true,
+                confirmButtonText: 'Сохранить',
+                cancelButtonText: 'Отмена',
+                showLoaderOnConfirm: true,
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'swal2-confirm btn-styled purple-btn modal-btn me-2',
+                    cancelButton: 'swal2-cancel btn-styled grey-btn modal-btn',
+                },
+                willOpen: () => {
+                    document.getElementById('swal-input1').value = t
+                },
+                preConfirm: () => {
+                    let data = {
+                        'type': 'edit',
+                        'id': id,
+                        'text': document.getElementById('swal-input1').value,
+                    };
+                    let csrftoken = getCookie('csrftoken');
+                    return fetch('/list_of_universities/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8',
+                            'Accept': 'application/json',
+                            'X-CSRFToken': csrftoken,
+                        },
+                        mode: 'same-origin',
+                        body: JSON.stringify(data)
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if(result.isConfirmed)
+                    window.location.reload()
+            })
+        }
+        function del(id) {
+            Swal.fire({
+                title: 'Вы уверены?',
+                text: "Вы не сможете это исправить!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Удалить',
+                cancelButtonText: 'Отмена',
+                showLoaderOnConfirm: true,
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'swal2-confirm btn-styled danger-btn modal-btn me-2',
+                    cancelButton: 'swal2-cancel btn-styled grey-btn modal-btn',
+                },
+                preConfirm: () => {
+                    let data = {
+                        'type': 'del',
+                        'id': id,
+                    };
+                    let csrftoken = getCookie('csrftoken');
+                    return fetch('/list_of_universities/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8',
+                            'Accept': 'application/json',
+                            'X-CSRFToken': csrftoken,
+                        },
+                        mode: 'same-origin',
+                        body: JSON.stringify(data)
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if(result.isConfirmed)
+                {
+                    Swal.fire({
+                        title: 'Удаленно!',
+                        text: 'Вуз удален из списка',
+                        icon: 'success',
+                        buttonsStyling: false,
+                        customClass: {
+                            confirmButton: 'swal2-confirm btn-styled purple-btn modal-btn me-2',
+                        },
+                    }).then(() =>{
+                        window.location.reload()
+                    })
+                }
+            })
+        }
+        function add() {
+             Swal.fire({
+                title: 'Добавление вуза',
+                 html:
+                      '<input id="swal-input1" style="margin: 1em 0 0; width: 97%" class="textinput textInput  form-control formInput modal-input" placeholder="Название университета">',
+                showCancelButton: true,
+                confirmButtonText: 'Добавить',
+                cancelButtonText: 'Отмена',
+                showLoaderOnConfirm: true,
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'swal2-confirm btn-styled purple-btn modal-btn me-2',
+                    cancelButton: 'swal2-cancel btn-styled grey-btn modal-btn',
+                },
+                preConfirm: () => {
+                    let data = {
+                        'type': 'add',
+                        'text': document.getElementById('swal-input1').value,
+                    };
+                    let csrftoken = getCookie('csrftoken');
+                    return fetch('/list_of_universities/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8',
+                            'Accept': 'application/json',
+                            'X-CSRFToken': csrftoken,
+                        },
+                        mode: 'same-origin',
+                        body: JSON.stringify(data)
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if(result.isConfirmed)
+                    window.location.reload()
+            })
+        }
+    </script>
 {% endblock scripts %}

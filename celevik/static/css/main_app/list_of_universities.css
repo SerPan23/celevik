@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-* {
+*:not(.swal2-icon-content) {
   font-family: "Roboto", sans-serif;
   color: #292C33; }
 
@@ -105,7 +105,11 @@ nav {
   transition: box-shadow 0.1s;
   box-shadow: 0 0 0 3px transparent;
   font-weight: 500;
-  user-select: none; }
+  user-select: none;
+  font-size: 1.2em;
+  border: 0;
+  border-radius: 70px;
+  display: inline-block; }
   .btn-styled[disabled] {
     opacity: 0.4; }
   .btn-styled:hover {
@@ -114,18 +118,20 @@ nav {
     background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)); }
   .btn-styled:not([disabled]) {
     cursor: pointer; }
+  .btn-styled.modal-btn {
+    font-size: 1.15rem; }
   .btn-styled.link-btn {
-    border: 0;
-    border-radius: 70px;
     background-color: #176DEA;
-    color: #ffffff;
-    font-size: 1.2em; }
+    color: #ffffff; }
   .btn-styled.danger-btn {
-    border: 0;
-    border-radius: 70px;
     background-color: #BB2124;
-    color: #ffffff;
-    font-size: 1.2em; }
+    color: #ffffff; }
+  .btn-styled.purple-btn {
+    background-color: #7A7DF5;
+    color: #ffffff; }
+  .btn-styled.grey-btn {
+    background-color: #424347;
+    color: #ffffff; }
   .btn-styled:focus {
     outline: none; }
   .btn-styled::-moz-focus-inner {
@@ -136,6 +142,9 @@ nav {
 
 .formInput {
   border-radius: 30px; }
+
+.modal-input {
+  font-size: 1.15rem; }
 
 .box {
   padding: 30px;
