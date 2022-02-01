@@ -30,8 +30,8 @@
                 <h5>Требования:</h5>
                 {{ vacancy.requirements }}
             </div>
-            <hr>
             {% if user.is_authenticated %}
+                <hr>
                 <div class="btns">
                     {% if request.user.user_info.role == "Entrant" %}
                         {% if is_respond %}
@@ -39,7 +39,7 @@
                         {% else %}
                             <a class="btn-styled link-btn" href="/respond/{{ vacancy.id }}">Откликнуться</a>
                         {% endif %}
-                    {% else %}
+                    {% elif request.user.id == vacancy.organisation.id %}
                         <h5 class="mb-2">Соискатели:</h5>
                         {% for r in responses %}
                             <div class="response mt-2">

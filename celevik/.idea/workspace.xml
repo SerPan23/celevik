@@ -2,26 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ca58a6b-9d61-465a-b370-af220c5d8234" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/css/registration/company_reg.sass" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/registration/company_reg.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/main_app/.sass-cache/b508c75882dc2cd343b8942d78bb0186f973ef62/list_of_applications_for_registration.sassc" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main_app/.sass-cache/b508c75882dc2cd343b8942d78bb0186f973ef62/list_of_applications_for_registration.sassc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/main_app/list_of_applications_for_registration.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main_app/list_of_applications_for_registration.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/main_app/list_of_applications_for_registration.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main_app/list_of_applications_for_registration.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/main_app/list_of_applications_for_registration.sass" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main_app/list_of_applications_for_registration.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/registration/.sass-cache/fde555f7245d3b1d729ae2cec2cd524bea408ee6/registration.sassc" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/registration/.sass-cache/fde555f7245d3b1d729ae2cec2cd524bea408ee6/registration.sassc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/registration/registration.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/registration/registration.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/registration/registration.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/registration/registration.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/registration/registration.sass" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/registration/registration.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/main_app/list_of_applications_for_registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/list_of_applications_for_registration.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main_app/list_of_directions.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/list_of_directions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main_app/list_of_universities.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/list_of_universities.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main_app/organization_profile_editor.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/organization_profile_editor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main_app/vacancy_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/vacancy_page.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,6 +94,7 @@
       <workItem from="1643385322071" duration="6956000" />
       <workItem from="1643476465913" duration="6807000" />
       <workItem from="1643634455945" duration="16087000" />
+      <workItem from="1643703724587" duration="9225000" />
     </task>
     <servers />
   </component>

@@ -8,6 +8,7 @@
     <div class="container warp">
         <div class="box">
             <h2 style="text-align: center;">Заявки на регистрацию от компаний:</h2>
+            {% csrf_token %}
             {% for application in applications %}
                 <div class="organisation_application mt-4">
                     <div class="mb-3"><h3 class="text-center">Заявка от <strong>{{ application.name }}</strong></h3></div>
@@ -20,17 +21,119 @@
                     </div>
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-3 text-lg-start mb-2 mb-md-0">
-                            <a class="btn-styled link-btn">Одобрить</a>
+                            <a class="btn-styled link-btn" onclick="approve({{ application.id }})">Одобрить</a>
                         </div>
                         <div class="col-12 col-md-6 col-lg-3 text-lg-start">
-                            <a class="btn-styled danger-btn">Отклонить</a>
+                            <a class="btn-styled danger-btn" onclick="reject({{ application.id }})">Отклонить</a>
                         </div>
                     </div>
                 </div>
+            {% empty %}
+                <br>
+                <h3>Пока нет ни одной заявки</h3>
             {% endfor %}
         </div>
     </div>
 {% endblock content %}
 
 {% block scripts %}
+    <script>
+        function approve(id) {
+            Swal.fire({
+                title: 'Вы уверены?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Да',
+                cancelButtonText: 'Отмена',
+                showLoaderOnConfirm: true,
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'swal2-confirm btn-styled purple-btn modal-btn me-2',
+                    cancelButton: 'swal2-cancel btn-styled grey-btn modal-btn',
+                },
+                preConfirm: () => {
+                    let data = {
+                        'type': 'approve',
+                        'id': id,
+                    };
+                    let csrftoken = getCookie('csrftoken');
+                    return fetch('/list_of_applications_for_registration/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8',
+                            'Accept': 'application/json',
+                            'X-CSRFToken': csrftoken,
+                        },
+                        mode: 'same-origin',
+                        body: JSON.stringify(data)
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if(result.isConfirmed)
+                {
+                    Swal.fire({
+                        title: 'Готово!',
+                        text: 'Заявка на регистрацию одобрена',
+                        icon: 'success',
+                        buttonsStyling: false,
+                        customClass: {
+                            confirmButton: 'swal2-confirm btn-styled purple-btn modal-btn me-2',
+                        },
+                    }).then(() =>{
+                        window.location.reload()
+                    })
+                }
+            })
+        }
+        function reject(id) {
+            Swal.fire({
+                title: 'Вы уверены?',
+                text: "Вы не сможете это исправить!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Да',
+                cancelButtonText: 'Отмена',
+                showLoaderOnConfirm: true,
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'swal2-confirm btn-styled danger-btn modal-btn me-2',
+                    cancelButton: 'swal2-cancel btn-styled grey-btn modal-btn',
+                },
+                preConfirm: () => {
+                    let data = {
+                        'type': 'reject',
+                        'id': id,
+                    };
+                    let csrftoken = getCookie('csrftoken');
+                    return fetch('/list_of_applications_for_registration/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8',
+                            'Accept': 'application/json',
+                            'X-CSRFToken': csrftoken,
+                        },
+                        mode: 'same-origin',
+                        body: JSON.stringify(data)
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if(result.isConfirmed)
+                {
+                    Swal.fire({
+                        title: 'Готово!',
+                        text: 'Заявка на регистрацию отклонена',
+                        icon: 'success',
+                        buttonsStyling: false,
+                        customClass: {
+                            confirmButton: 'swal2-confirm btn-styled purple-btn modal-btn me-2',
+                        },
+                    }).then(() =>{
+                        window.location.reload()
+                    })
+                }
+            })
+        }
+    </script>
 {% endblock scripts %}

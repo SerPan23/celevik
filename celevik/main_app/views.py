@@ -52,18 +52,6 @@ def generate_code():
     return str(random.randint(10000, 99999999))
 
 
-def company_reg(request):
-    if request.method == "POST":
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        phone_number = request.POST.get("phone_number")
-        text_about = request.POST.get("text_about")
-        application = CompanyRegApplication.objects.create(name=name, email=email, phone_number=phone_number,text_about=text_about)
-        application.save()
-        return HttpResponseRedirect("/")
-    return render(request, "registration/company_reg.html")
-
-
 def account_confirmation(request):
     username = request.GET.get("username", "")
     error = request.GET.get("error", "")
@@ -263,11 +251,47 @@ def respond(request, pk):
     return HttpResponseRedirect("/vacancy/"+str(pk)+"/")
 
 
+def company_reg(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        phone_number = request.POST.get("phone_number")
+        text_about = request.POST.get("text_about")
+        application = CompanyRegApplication.objects.create(name=name, email=email, phone_number=phone_number,text_about=text_about)
+        application.save()
+        return HttpResponseRedirect("/")
+    return render(request, "registration/company_reg.html")
+
+
+@login_required
 def list_of_applications_for_registration(request):
+    if request.method == "POST":
+        data = json.loads(request.body.decode("utf-8"))
+        id = data["id"]
+        application = CompanyRegApplication.objects.get(id=id)
+        if data["type"] == "approve":
+            password = User.objects.make_random_password()
+            new_company = User.objects.create_user(username=application.email, email=application.email, password=password)
+            new_company.is_active = True
+            new_company.save()
+            user_inf = UsersInf.objects.create(user=new_company, code=0, role='Company')
+            user_inf.name = application.name
+            user_inf.phone_number = application.phone_number
+            user_inf.text_about = application.text_about
+            user_inf.save()
+            message = 'Ваша заявка на регистрацию одобрена!\nВаш пароль: ' + password
+            send_mail(settings.EMAIL_TOPIC, message,
+                      settings.EMAIL_HOST_USER, [application.email])
+        if data["type"] == "reject":
+            message = 'К сожалению ваша заявку на регистрацию отклонена\nПопробуйте подать заявку заново'
+            send_mail(settings.EMAIL_TOPIC, message,
+                      settings.EMAIL_HOST_USER, [application.email])
+        application.delete()
     applications = CompanyRegApplication.objects.all()
     return render(request, 'main_app/list_of_applications_for_registration.html', {"applications": applications})
 
 
+@login_required
 def list_of_universities(request):
     if request.method == "POST":
         data = json.loads(request.body.decode("utf-8"))
@@ -289,6 +313,7 @@ def list_of_universities(request):
     return render(request, 'main_app/list_of_universities.html', {'universities': universities})
 
 
+@login_required
 def list_of_directions(request):
     if request.method == "POST":
         data = json.loads(request.body.decode("utf-8"))
