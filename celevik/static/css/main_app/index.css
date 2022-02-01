@@ -157,6 +157,10 @@ nav {
   .link:hover {
     color: #176DEA; }
 
+.input-group:not(.has-validation) > .dropdown-toggle:nth-last-child(n+3), .input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu) {
+  border-top-right-radius: 30px !important;
+  border-bottom-right-radius: 30px !important; }
+
 .search-box {
   padding-top: 10px;
   min-height: 420px;
@@ -164,8 +168,35 @@ nav {
   margin-bottom: 20px; }
   .search-box .sort-box {
     min-height: 410px;
+    padding-top: 50px; }
+
+.multi-select-custom {
+  font-size: 1rem; }
+  .multi-select-custom .ss-multi-selected {
+    padding: 5px 15px;
+    border-radius: 30px; }
+  .multi-select-custom .ss-value-text {
+    color: #ffffff;
+    font-size: 1rem; }
+  .multi-select-custom .ss-value-delete {
+    color: #BB2124;
+    font-size: 1rem; }
+  .multi-select-custom .ss-multi-selected .ss-add .ss-plus {
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: center; }
+    background: #ffffff;
+    position: relative;
+    height: 18px;
+    width: 4px;
+    transition: transform 0.2s; }
+    .multi-select-custom .ss-multi-selected .ss-add .ss-plus:after {
+      background: #ffffff;
+      content: "";
+      position: absolute;
+      height: 4px;
+      width: 18px;
+      left: -7px;
+      top: 7px; }
 
 /*# sourceMappingURL=index.css.map */

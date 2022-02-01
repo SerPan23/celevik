@@ -2,12 +2,30 @@
 {% load static %}
 {% load custom_filters %}
 {% block links %}
-<link rel="stylesheet" href="{% static 'css/main_app/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slimselect.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main_app/index.css' %}">
 {% endblock links %}
 {% block content %}
     <div class="search-box">
         <div class="container sort-box">
-            <h2>Здесь будет поиск с фильтрами</h2>
+            <form class="sort-form" method="POST" enctype="multipart/form-data" action="/">
+                <div class="mb-4">
+                    <select id="universities-multiple" class="formInput multi-select-custom" multiple>
+                        {% for university in universities %}
+                            <option value="{{ university.title }}">{{ university.title }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="hidden" id="universities" name="universities" value="">
+                </div>
+                <div class="mb-4">
+                    <select id="directions-multiple" class="formInput multi-select-custom" multiple>
+                        {% for direction in directions %}
+                            <option value="{{ direction.code }}">Специальность {{ direction.code }} — «{{ direction.title }}»</option>
+                        {% endfor %}
+                    </select>
+                    <input type="hidden" id="directions" name="directions" value="">
+                </div>
+            </form>
         </div>
     </div>
     <div class="container">
@@ -35,4 +53,30 @@
 {% endblock content %}
 
 {% block scripts %}
+    <script src="{% static 'js/slimselect.min.js' %}"></script>
+
+    <script>
+        var select = new SlimSelect({
+            select: '#universities-multiple',
+            closeOnSelect: false,
+            searchText: 'Нет результатов',
+            placeholder: 'Выберите вузы',
+            hideSelectedOption: true,
+            onChange: (info) => {
+                {#console.log(select.selected().join('|'))#}
+                document.getElementById("universities").value = select.selected().join('|');
+            }
+        })
+        var select2 = new SlimSelect({
+            select: '#directions-multiple',
+            closeOnSelect: false,
+            searchText: 'Нет результатов',
+            placeholder: 'Выберите направления',
+            hideSelectedOption: true,
+            onChange: (info) => {
+                {#console.log(select.selected().join('|'))#}
+                document.getElementById("directions").value = select.selected().join('|');
+            }
+        })
+    </script>
 {% endblock scripts %}

@@ -1,13 +1,44 @@
 @import "../main"
 
+.input-group:not(.has-validation)>.dropdown-toggle:nth-last-child(n+3), .input-group:not(.has-validation)>:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu)
+  border-top-right-radius: 30px !important
+  border-bottom-right-radius: 30px !important
+
 .search-box
   padding-top: 10px
   min-height: 420px
   background: $bgAltColor
   margin-bottom: 20px
-
   .sort-box
     min-height: 410px
-    display: flex
-    align-items: center
-    justify-content: center
+    padding-top: 50px
+    //.sort-form
+
+.multi-select-custom
+    font-size: 1rem
+    .ss-multi-selected
+        padding: 5px 15px
+        border-radius: 30px
+    .ss-value-text
+        color: $white
+        font-size: 1rem
+    .ss-value-delete
+        color: $dangerColor
+        font-size: 1rem
+    .ss-multi-selected .ss-add .ss-plus
+        display: flex
+        justify-content: center
+        align-items: center
+        background: $white
+        position: relative
+        height: 18px
+        width: 4px
+        transition: transform .2s
+        &:after
+            background: $white
+            content: ""
+            position: absolute
+            height: 4px
+            width: 18px
+            left: -7px
+            top: 7px

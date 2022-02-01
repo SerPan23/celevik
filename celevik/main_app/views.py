@@ -18,7 +18,9 @@ from celevik import settings
 # Create your views here.
 def index(request):
     vacancies = Vacancy.objects.all()
-    return render(request, 'main_app/index.html', {'vacancies': vacancies})
+    universities = Universities.objects.all()
+    directions = Direction.objects.all()
+    return render(request, 'main_app/index.html', {'vacancies': vacancies, 'universities': universities, 'directions': directions})
 
 
 def registration(request):
