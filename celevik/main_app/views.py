@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
+from django.db.models import Q
 from django.shortcuts import render
 from django.core.mail import send_mail
 import random
@@ -15,12 +16,41 @@ from .models import UsersInf, Vacancy, Responses, Universities, Direction, Compa
 from celevik import settings
 
 
+def is_intersection_list(list1, list2):
+    res = set(list1).intersection(list2)
+    if len(res) > 0:
+        return True
+    return False
+
+
 # Create your views here.
 def index(request):
-    vacancies = Vacancy.objects.all()
     universities = Universities.objects.all()
     directions = Direction.objects.all()
-    return render(request, 'main_app/index.html', {'vacancies': vacancies, 'universities': universities, 'directions': directions})
+    vacancies = Vacancy.objects.all()
+    if request.method == "POST":
+        sort_universities = request.POST.get("universities")
+        sort_directions = request.POST.get("directions")
+        sus = sort_universities.split('|')
+        sds = sort_directions.split('|')
+        if sds[0] != '' or sus[0] != '':
+            filtered_ids = []
+            for v in vacancies:
+                if sds[0] != '' and sus[0] != '':
+                    if v.title.split()[1] in sds and is_intersection_list(v.partners.split('|'), sus):
+                        filtered_ids.append(v.id)
+                elif sds[0] == '' and sus[0] != '':
+                    if is_intersection_list(v.partners.split('|'), sus):
+                        filtered_ids.append(v.id)
+                elif sds[0] != '' and sus[0] == '':
+                    if v.title.split()[1] in sds:
+                        filtered_ids.append(v.id)
+            vacancies = Vacancy.objects.filter(id__in=filtered_ids)
+        return render(request, 'main_app/index.html',
+                      {'vacancies': vacancies, 'universities': universities, 'directions': directions,
+                       'sort_universities': sort_universities, 'sort_directions': sort_directions})
+    return render(request, 'main_app/index.html',
+                  {'vacancies': vacancies, 'universities': universities, 'directions': directions})
 
 
 def registration(request):
@@ -198,7 +228,8 @@ def vacancy_page(request, pk):
     is_respond = False
     if request.user.is_authenticated and responses.filter(user=request.user).exists():
         is_respond = True
-    return render(request, 'main_app/vacancy_page.html', {"vacancy": vacancy, "responses": responses, "is_respond": is_respond})
+    return render(request, 'main_app/vacancy_page.html',
+                  {"vacancy": vacancy, "responses": responses, "is_respond": is_respond})
 
 
 @login_required
@@ -208,7 +239,8 @@ def add_vacancy(request):
     directions = Direction.objects.all()
     if edit_id:
         vacancy = Vacancy.objects.get(id=edit_id)
-        return render(request, 'main_app/add_vacancy.html', {"vacancy": vacancy, "universities": universities, "directions": directions})
+        return render(request, 'main_app/add_vacancy.html',
+                      {"vacancy": vacancy, "universities": universities, "directions": directions})
     if request.method == "POST":
         edit = request.POST.get("edit", "")
         title = request.POST.get("title", "")
@@ -250,7 +282,7 @@ def respond(request, pk):
     user = User.objects.get(id=request.user.id)
     response = Responses.objects.create(vacancy=vacancy, user=user)
     response.save()
-    return HttpResponseRedirect("/vacancy/"+str(pk)+"/")
+    return HttpResponseRedirect("/vacancy/" + str(pk) + "/")
 
 
 def company_reg(request):
@@ -259,7 +291,8 @@ def company_reg(request):
         email = request.POST.get("email")
         phone_number = request.POST.get("phone_number")
         text_about = request.POST.get("text_about")
-        application = CompanyRegApplication.objects.create(name=name, email=email, phone_number=phone_number,text_about=text_about)
+        application = CompanyRegApplication.objects.create(name=name, email=email, phone_number=phone_number,
+                                                           text_about=text_about)
         application.save()
         return HttpResponseRedirect("/")
     return render(request, "registration/company_reg.html")
@@ -273,7 +306,8 @@ def list_of_applications_for_registration(request):
         application = CompanyRegApplication.objects.get(id=id)
         if data["type"] == "approve":
             password = User.objects.make_random_password()
-            new_company = User.objects.create_user(username=application.email, email=application.email, password=password)
+            new_company = User.objects.create_user(username=application.email, email=application.email,
+                                                   password=password)
             new_company.is_active = True
             new_company.save()
             user_inf = UsersInf.objects.create(user=new_company, code=0, role='Company')

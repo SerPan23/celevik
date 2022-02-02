@@ -9,6 +9,8 @@
     <div class="search-box">
         <div class="container sort-box">
             <form class="sort-form" method="POST" enctype="multipart/form-data" action="/">
+                {% csrf_token %}
+                <h2 class="text-center mb-3">Фильтры</h2>
                 <div class="mb-4">
                     <select id="universities-multiple" class="formInput multi-select-custom" multiple>
                         {% for university in universities %}
@@ -24,6 +26,9 @@
                         {% endfor %}
                     </select>
                     <input type="hidden" id="directions" name="directions" value="">
+                </div>
+                <div>
+                    <button class="btn-styled link-btn mb-5">Применить</button>
                 </div>
             </form>
         </div>
@@ -47,6 +52,8 @@
                         <a href="/vacancy/{{ vacancy.id }}" class="more-detailed">Подробнее</a>
                     </div>
                 </div>
+            {% empty %}
+                <h3 class="text-center">С заданными фильтрами результаты не найдены!</h3>
             {% endfor %}
         </div>
     </div>
@@ -75,8 +82,12 @@
             hideSelectedOption: true,
             onChange: (info) => {
                 {#console.log(select.selected().join('|'))#}
-                document.getElementById("directions").value = select.selected().join('|');
+                document.getElementById("directions").value = select2.selected().join('|');
             }
         })
+        let d = "{{ sort_universities }}".split('|')
+        let d2 = "{{ sort_directions }}".split('|')
+        select.set(d)
+        select2.set(d2)
     </script>
 {% endblock scripts %}

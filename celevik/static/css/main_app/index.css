@@ -163,11 +163,11 @@ nav {
 
 .search-box {
   padding-top: 10px;
-  min-height: 420px;
+  min-height: 320px;
   background: #F8F9FA;
   margin-bottom: 20px; }
   .search-box .sort-box {
-    min-height: 410px;
+    min-height: 310px;
     padding-top: 50px; }
 
 .multi-select-custom {
