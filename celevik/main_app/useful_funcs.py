@@ -13,8 +13,8 @@ def is_Admin(self):
     return False
 
 
-comp_login_required = user_passes_test(lambda u: True if is_Company(u) else False)
-adm_login_required = user_passes_test(lambda u: True if is_Admin(u) else False)
+comp_login_required = user_passes_test(lambda u: True if is_Company(u) else False, login_url='/?is_not_comp=True')
+adm_login_required = user_passes_test(lambda u: True if is_Admin(u) else False, login_url='/?is_not_adm=True')
 
 
 def company_login_required(view_func):

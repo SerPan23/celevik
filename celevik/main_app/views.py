@@ -24,6 +24,8 @@ def index(request):
     universities = Universities.objects.all()
     directions = Direction.objects.all()
     vacancies = Vacancy.objects.all()
+    is_not_comp = request.GET.get("is_not_adm", "")
+    is_not_adm = request.GET.get("is_not_adm", "")
     if request.method == "POST":
         sort_universities = request.POST.get("universities")
         sort_directions = request.POST.get("directions")
@@ -44,9 +46,11 @@ def index(request):
             vacancies = Vacancy.objects.filter(id__in=filtered_ids)
         return render(request, 'main_app/index.html',
                       {'vacancies': vacancies, 'universities': universities, 'directions': directions,
-                       'sort_universities': sort_universities, 'sort_directions': sort_directions})
+                       'sort_universities': sort_universities, 'sort_directions': sort_directions,
+                       'is_not_comp': is_not_comp, 'is_not_adm': is_not_adm})
     return render(request, 'main_app/index.html',
-                  {'vacancies': vacancies, 'universities': universities, 'directions': directions})
+                  {'vacancies': vacancies, 'universities': universities, 'directions': directions,
+                   'is_not_comp': is_not_comp, 'is_not_adm': is_not_adm})
 
 
 def registration(request):
