@@ -32,6 +32,27 @@
                 <br>
                 <h3>Пока нет ни одной заявки</h3>
             {% endfor %}
+            {% if applications|length > 0 %}
+            <div class="mt-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item {% if cur_page == pages_num_range|first  %}disabled{% endif %}">
+                        <a class="page-link" href="/list_of_applications_for_registration/?page_number={{ cur_page|add:"-1"}}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% for i in pages_num_range %}
+                        <li class="page-item {% if i == cur_page %}active{% endif %}">
+                            <a class="page-link" href="/list_of_applications_for_registration/?page_number={{ i }}">{{ i }}</a>
+                        </li>
+                    {% endfor %}
+                    <li class="page-item {% if cur_page == pages_num_range|last  %}disabled{% endif %}">
+                        <a class="page-link" href="/list_of_applications_for_registration/?page_number={{ cur_page|add:"1"}}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            {% endif %}
         </div>
     </div>
 {% endblock content %}

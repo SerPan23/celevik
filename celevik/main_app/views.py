@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render
 from django.core.mail import send_mail
@@ -323,8 +324,16 @@ def list_of_applications_for_registration(request):
             send_mail(settings.EMAIL_TOPIC, message,
                       settings.EMAIL_HOST_USER, [application.email])
         application.delete()
+    page_number = int(request.GET.get("page_number", "") if request.GET.get("page_number", "") != '' else 1)
     applications = CompanyRegApplication.objects.all()
-    return render(request, 'main_app/list_of_applications_for_registration.html', {"applications": applications})
+    paginator = Paginator(applications, 25)
+    if page_number > paginator.num_pages:
+        return HttpResponseRedirect("/list_of_applications_for_registration/?page_number="+str(paginator.num_pages))
+    if page_number < 1:
+        return HttpResponseRedirect("/list_of_applications_for_registration/?page_number=1")
+    page_applications = paginator.get_page(page_number)
+    return render(request, 'main_app/list_of_applications_for_registration.html',
+                  {"applications": page_applications, "pages_num_range": range(1, paginator.num_pages+1), 'cur_page': page_number})
 
 
 @admin_login_required
@@ -345,8 +354,17 @@ def list_of_universities(request):
             text = data["text"]
             university = Universities.objects.create(title=text)
             university.save()
+    page_number = int(request.GET.get("page_number", "") if request.GET.get("page_number", "") != '' else 1)
     universities = Universities.objects.all()
-    return render(request, 'main_app/list_of_universities.html', {'universities': universities})
+    paginator = Paginator(universities, 1)
+    if page_number > paginator.num_pages:
+        return HttpResponseRedirect("/list_of_universities/?page_number="+str(paginator.num_pages))
+    if page_number < 1:
+        return HttpResponseRedirect("/list_of_universities/?page_number=1")
+    page_applications = paginator.get_page(page_number)
+    return render(request, 'main_app/list_of_universities.html',
+                  {'universities': page_applications, "pages_num_range": range(1, paginator.num_pages+1),
+                   'cur_page': page_number})
 
 
 @admin_login_required
@@ -370,5 +388,15 @@ def list_of_directions(request):
             code = data["code"]
             university = Direction.objects.create(title=text, code=code)
             university.save()
+    page_number = int(request.GET.get("page_number", "") if request.GET.get("page_number", "") != '' else 1)
     directions = Direction.objects.all()
-    return render(request, 'main_app/list_of_directions.html', {'directions': directions})
+    paginator = Paginator(directions, 1)
+    if page_number > paginator.num_pages:
+        return HttpResponseRedirect("/list_of_directions/?page_number=" + str(paginator.num_pages))
+    if page_number < 1:
+        return HttpResponseRedirect("/list_of_directions/?page_number=1")
+    page_applications = paginator.get_page(page_number)
+    pages_num_range = get_pages_interval(page_number, paginator.num_pages)
+    return render(request, 'main_app/list_of_directions.html',
+                  {'directions': page_applications, "pages_num_range": pages_num_range,
+                   'cur_page': page_number})
