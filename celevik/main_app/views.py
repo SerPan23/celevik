@@ -16,14 +16,10 @@ from .models import UsersInf, Vacancy, Responses, Universities, Direction, Compa
 from celevik import settings
 
 
-def is_intersection_list(list1, list2):
-    res = set(list1).intersection(list2)
-    if len(res) > 0:
-        return True
-    return False
-
-
 # Create your views here.
+from .useful_funcs import *
+
+
 def index(request):
     universities = Universities.objects.all()
     directions = Direction.objects.all()
@@ -182,7 +178,7 @@ def organization_profile(request, pk):
     return render(request, 'main_app/organization_profile.html', {'u_info': u_info, 'vacancies': vacancies})
 
 
-@login_required
+@company_login_required
 def organization_profile_editor(request):
     uid = request.user.id
     user = User.objects.get(id=uid)
@@ -232,7 +228,7 @@ def vacancy_page(request, pk):
                   {"vacancy": vacancy, "responses": responses, "is_respond": is_respond})
 
 
-@login_required
+@company_login_required
 def add_vacancy(request):
     edit_id = request.GET.get("edit_id", "")
     universities = Universities.objects.all()
@@ -269,7 +265,7 @@ def add_vacancy(request):
     return render(request, 'main_app/add_vacancy.html', {"universities": universities, "directions": directions})
 
 
-@login_required
+@company_login_required
 def del_vacancy(request, pk):
     vacancy = Vacancy.objects.get(id=pk)
     vacancy.delete()
@@ -298,7 +294,7 @@ def company_reg(request):
     return render(request, "registration/company_reg.html")
 
 
-@login_required
+@admin_login_required
 def list_of_applications_for_registration(request):
     if request.method == "POST":
         data = json.loads(request.body.decode("utf-8"))
@@ -327,7 +323,7 @@ def list_of_applications_for_registration(request):
     return render(request, 'main_app/list_of_applications_for_registration.html', {"applications": applications})
 
 
-@login_required
+@admin_login_required
 def list_of_universities(request):
     if request.method == "POST":
         data = json.loads(request.body.decode("utf-8"))
@@ -349,7 +345,7 @@ def list_of_universities(request):
     return render(request, 'main_app/list_of_universities.html', {'universities': universities})
 
 
-@login_required
+@admin_login_required
 def list_of_directions(request):
     if request.method == "POST":
         data = json.loads(request.body.decode("utf-8"))

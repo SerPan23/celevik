@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ca58a6b-9d61-465a-b370-af220c5d8234" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/main_app/useful_funcs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/main_app/.sass-cache/b508c75882dc2cd343b8942d78bb0186f973ef62/index.sassc" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main_app/.sass-cache/b508c75882dc2cd343b8942d78bb0186f973ef62/index.sassc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/main_app/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main_app/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/main_app/index.sass" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main_app/index.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main_app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +94,8 @@
       <workItem from="1643634455945" duration="16087000" />
       <workItem from="1643703724587" duration="9225000" />
       <workItem from="1643736826455" duration="4750000" />
-      <workItem from="1643817115756" duration="8008000" />
+      <workItem from="1643817115756" duration="9134000" />
+      <workItem from="1643875663632" duration="1715000" />
     </task>
     <servers />
   </component>
