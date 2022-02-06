@@ -32,7 +32,7 @@
                 <br>
                 <h3>Пока нет ни одной заявки</h3>
             {% endfor %}
-            {% if applications|length > 0 %}
+            {% if applications_len > 25 %}
             <div class="mt-5">
                 <ul class="pagination justify-content-center">
                     <li class="page-item {% if cur_page == pages_num_range|first  %}disabled{% endif %}">

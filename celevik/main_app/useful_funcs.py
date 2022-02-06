@@ -47,7 +47,7 @@ def get_pages_interval(cur, pages):
     elif cur == e and (e+1 <= pages):
         s += 1
         e += 1
-    elif cur == e-1:
+    elif cur == e-1 and (e+1 <= pages):
         s += 1
         e += 1
     elif cur == s+1 and (s-1 >= 1):

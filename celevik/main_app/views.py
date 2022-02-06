@@ -27,6 +27,8 @@ def index(request):
     vacancies = Vacancy.objects.all()
     is_not_comp = request.GET.get("is_not_adm", "")
     is_not_adm = request.GET.get("is_not_adm", "")
+    res_data = {'universities': universities, 'directions': directions,
+                   'is_not_comp': is_not_comp, 'is_not_adm': is_not_adm}
     if request.method == "POST":
         sort_universities = request.POST.get("universities")
         sort_directions = request.POST.get("directions")
@@ -45,13 +47,24 @@ def index(request):
                     if v.title.split()[1] in sds:
                         filtered_ids.append(v.id)
             vacancies = Vacancy.objects.filter(id__in=filtered_ids)
-        return render(request, 'main_app/index.html',
-                      {'vacancies': vacancies, 'universities': universities, 'directions': directions,
-                       'sort_universities': sort_universities, 'sort_directions': sort_directions,
-                       'is_not_comp': is_not_comp, 'is_not_adm': is_not_adm})
-    return render(request, 'main_app/index.html',
-                  {'vacancies': vacancies, 'universities': universities, 'directions': directions,
-                   'is_not_comp': is_not_comp, 'is_not_adm': is_not_adm})
+        res_data['sort_universities'] = sort_universities
+        res_data['sort_directions'] = sort_directions
+    if request.POST.get("changed_sort", "") == 'True':
+        page_number = 1
+    else:
+        page_number = int(request.POST.get("page_number", "") if request.POST.get("page_number", "") != '' else 1)
+    paginator = Paginator(vacancies, 25)
+    if page_number > paginator.num_pages:
+        page_number = paginator.num_pages
+    if page_number < 1:
+        page_number = 1
+    page_vacancies = paginator.get_page(page_number)
+    pages_num_range = get_pages_interval(page_number, paginator.num_pages)
+    res_data['vacancies'] = page_vacancies
+    res_data['cur_page'] = page_number
+    res_data['pages_num_range'] = pages_num_range
+    res_data['vacancies_len'] = len(vacancies)
+    return render(request, 'main_app/index.html', res_data)
 
 
 def registration(request):
@@ -333,7 +346,8 @@ def list_of_applications_for_registration(request):
         return HttpResponseRedirect("/list_of_applications_for_registration/?page_number=1")
     page_applications = paginator.get_page(page_number)
     return render(request, 'main_app/list_of_applications_for_registration.html',
-                  {"applications": page_applications, "pages_num_range": range(1, paginator.num_pages+1), 'cur_page': page_number})
+                  {"applications": page_applications, "pages_num_range": range(1, paginator.num_pages+1),
+                   'cur_page': page_number, 'applications_len': len(applications)})
 
 
 @admin_login_required
@@ -356,7 +370,7 @@ def list_of_universities(request):
             university.save()
     page_number = int(request.GET.get("page_number", "") if request.GET.get("page_number", "") != '' else 1)
     universities = Universities.objects.all()
-    paginator = Paginator(universities, 1)
+    paginator = Paginator(universities, 25)
     if page_number > paginator.num_pages:
         return HttpResponseRedirect("/list_of_universities/?page_number="+str(paginator.num_pages))
     if page_number < 1:
@@ -364,7 +378,7 @@ def list_of_universities(request):
     page_applications = paginator.get_page(page_number)
     return render(request, 'main_app/list_of_universities.html',
                   {'universities': page_applications, "pages_num_range": range(1, paginator.num_pages+1),
-                   'cur_page': page_number})
+                   'cur_page': page_number, 'universities_len': len(universities)})
 
 
 @admin_login_required
@@ -390,7 +404,7 @@ def list_of_directions(request):
             university.save()
     page_number = int(request.GET.get("page_number", "") if request.GET.get("page_number", "") != '' else 1)
     directions = Direction.objects.all()
-    paginator = Paginator(directions, 1)
+    paginator = Paginator(directions, 25)
     if page_number > paginator.num_pages:
         return HttpResponseRedirect("/list_of_directions/?page_number=" + str(paginator.num_pages))
     if page_number < 1:
@@ -399,4 +413,4 @@ def list_of_directions(request):
     pages_num_range = get_pages_interval(page_number, paginator.num_pages)
     return render(request, 'main_app/list_of_directions.html',
                   {'directions': page_applications, "pages_num_range": pages_num_range,
-                   'cur_page': page_number})
+                   'cur_page': page_number, 'directions_len': len(directions)})
