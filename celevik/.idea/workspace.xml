@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6ca58a6b-9d61-465a-b370-af220c5d8234" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/useful_funcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/useful_funcs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main_app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main_app/list_of_applications_for_registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/list_of_applications_for_registration.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main_app/list_of_directions.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/list_of_directions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main_app/list_of_universities.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/list_of_universities.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +100,8 @@
       <workItem from="1643972298293" duration="303000" />
       <workItem from="1644161866594" duration="7891000" />
       <workItem from="1644174086454" duration="118000" />
+      <workItem from="1644252779423" duration="4613000" />
+      <workItem from="1644329749769" duration="425000" />
     </task>
     <servers />
   </component>
