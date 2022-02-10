@@ -41,7 +41,9 @@
                 <div class="btns">
                     {% if request.user.user_info.role == "Entrant" %}
                         {% if not vacancy.is_frozen %}
-                            {% if is_respond %}
+                            {% if is_confirm %}
+                                 <a class="btn-styled link-btn" disabled>Заявка подтверждена</a>
+                            {% elif is_respond %}
                                 <a class="btn-styled link-btn" disabled>Вы уже откликнулись</a>
                             {% else %}
                                 <a class="btn-styled link-btn" onclick="respond()">Откликнуться</a>

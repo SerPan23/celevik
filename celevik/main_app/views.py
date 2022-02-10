@@ -267,10 +267,13 @@ def vacancy_page(request, pk):
             send_mail(settings.EMAIL_TOPIC, message,
                       settings.EMAIL_HOST_USER, [response.vacancy.organisation.email])
     is_respond = False
+    is_confirm = False
     if request.user.is_authenticated and responses.filter(user=request.user).exists():
         is_respond = True
+        r = responses.get(user=request.user)
+        is_confirm = r.is_confirmed
     return render(request, 'main_app/vacancy_page.html',
-                  {"vacancy": vacancy, "responses": responses, "is_respond": is_respond})
+                  {"vacancy": vacancy, "responses": responses, "is_respond": is_respond, 'is_confirm': is_confirm})
 
 
 @company_login_required
