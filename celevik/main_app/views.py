@@ -16,7 +16,6 @@ from django.urls import reverse
 from .models import UsersInf, Vacancy, Responses, Universities, Direction, CompanyRegApplication
 from celevik import settings
 
-
 # Create your views here.
 from .useful_funcs import *
 
@@ -24,11 +23,11 @@ from .useful_funcs import *
 def index(request):
     universities = Universities.objects.all()
     directions = Direction.objects.all()
-    vacancies = Vacancy.objects.all()
+    vacancies = Vacancy.objects.filter(is_frozen=False)
     is_not_comp = request.GET.get("is_not_adm", "")
     is_not_adm = request.GET.get("is_not_adm", "")
     res_data = {'universities': universities, 'directions': directions,
-                   'is_not_comp': is_not_comp, 'is_not_adm': is_not_adm}
+                'is_not_comp': is_not_comp, 'is_not_adm': is_not_adm}
     if request.method == "POST":
         sort_universities = request.POST.get("universities")
         sort_directions = request.POST.get("directions")
@@ -46,7 +45,7 @@ def index(request):
                 elif sds[0] != '' and sus[0] == '':
                     if v.title.split()[1] in sds:
                         filtered_ids.append(v.id)
-            vacancies = Vacancy.objects.filter(id__in=filtered_ids)
+            vacancies = vacancies.filter(id__in=filtered_ids)
         res_data['sort_universities'] = sort_universities
         res_data['sort_directions'] = sort_directions
     if request.POST.get("changed_sort", "") == 'True':
@@ -239,6 +238,34 @@ def organization_profile_editor(request):
 def vacancy_page(request, pk):
     vacancy = Vacancy.objects.get(id=pk)
     responses = Responses.objects.filter(vacancy=vacancy)
+    if request.method == "POST":
+        data = json.loads(request.body.decode("utf-8"))
+        if request.user.id == vacancy.organisation.id:
+            if data["type"] == "confirm":
+                u = User.objects.get(id=data["user_id"])
+                response = responses.get(user=u)
+                response.is_confirmed = True
+                response.save()
+                message = 'Вам подтвердили заявку на ' + str(response.vacancy.title) + '\nОт ' \
+                          + str(response.vacancy.organisation.user_info.name)
+                send_mail(settings.EMAIL_TOPIC, message,
+                          settings.EMAIL_HOST_USER, [u.email])
+            elif data["type"] == "del":
+                vacancy.delete()
+            elif data["type"] == "frost":
+                vacancy.is_frozen = True
+                vacancy.save()
+            elif data["type"] == "defrost":
+                vacancy.is_frozen = False
+                vacancy.save()
+        elif data["type"] == "respond":
+            user = User.objects.get(id=request.user.id)
+            response = Responses.objects.create(vacancy=vacancy, user=user)
+            response.save()
+            message = str(user.user_info.surname) + ' ' + str(user.user_info.name) + \
+                      ' заинтересовался вашей вакансией: ' + str(response.vacancy.title)
+            send_mail(settings.EMAIL_TOPIC, message,
+                      settings.EMAIL_HOST_USER, [response.vacancy.organisation.email])
     is_respond = False
     if request.user.is_authenticated and responses.filter(user=request.user).exists():
         is_respond = True
@@ -283,22 +310,6 @@ def add_vacancy(request):
     return render(request, 'main_app/add_vacancy.html', {"universities": universities, "directions": directions})
 
 
-@company_login_required
-def del_vacancy(request, pk):
-    vacancy = Vacancy.objects.get(id=pk)
-    vacancy.delete()
-    return HttpResponseRedirect("/")
-
-
-@login_required
-def respond(request, pk):
-    vacancy = Vacancy.objects.get(id=pk)
-    user = User.objects.get(id=request.user.id)
-    response = Responses.objects.create(vacancy=vacancy, user=user)
-    response.save()
-    return HttpResponseRedirect("/vacancy/" + str(pk) + "/")
-
-
 def company_reg(request):
     if request.method == "POST":
         name = request.POST.get("name")
@@ -341,12 +352,12 @@ def list_of_applications_for_registration(request):
     applications = CompanyRegApplication.objects.all()
     paginator = Paginator(applications, 25)
     if page_number > paginator.num_pages:
-        return HttpResponseRedirect("/list_of_applications_for_registration/?page_number="+str(paginator.num_pages))
+        return HttpResponseRedirect("/list_of_applications_for_registration/?page_number=" + str(paginator.num_pages))
     if page_number < 1:
         return HttpResponseRedirect("/list_of_applications_for_registration/?page_number=1")
     page_applications = paginator.get_page(page_number)
     return render(request, 'main_app/list_of_applications_for_registration.html',
-                  {"applications": page_applications, "pages_num_range": range(1, paginator.num_pages+1),
+                  {"applications": page_applications, "pages_num_range": range(1, paginator.num_pages + 1),
                    'cur_page': page_number, 'applications_len': len(applications)})
 
 
@@ -372,12 +383,12 @@ def list_of_universities(request):
     universities = Universities.objects.all()
     paginator = Paginator(universities, 25)
     if page_number > paginator.num_pages:
-        return HttpResponseRedirect("/list_of_universities/?page_number="+str(paginator.num_pages))
+        return HttpResponseRedirect("/list_of_universities/?page_number=" + str(paginator.num_pages))
     if page_number < 1:
         return HttpResponseRedirect("/list_of_universities/?page_number=1")
     page_applications = paginator.get_page(page_number)
     return render(request, 'main_app/list_of_universities.html',
-                  {'universities': page_applications, "pages_num_range": range(1, paginator.num_pages+1),
+                  {'universities': page_applications, "pages_num_range": range(1, paginator.num_pages + 1),
                    'cur_page': page_number, 'universities_len': len(universities)})
 
 

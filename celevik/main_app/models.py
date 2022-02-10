@@ -36,6 +36,7 @@ class Vacancy(models.Model):
     description = models.TextField("Описание вакансии", default='')
     requirements = models.TextField("Требования к соискателю", default='')
     title = models.CharField("Название", default='', null=True, blank=True, max_length=250)
+    is_frozen = models.BooleanField("Заморожено?", default=False)
 
     def __str__(self):
         return '{} {}'.format(self.organisation.email, self.title)
@@ -48,6 +49,7 @@ class Responses(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True,
                                 default='',
                                 verbose_name="Связь с таблицей пользователей")
+    is_confirmed = models.BooleanField("Подтвержден?", default=False)
 
 
 class Universities(models.Model):
