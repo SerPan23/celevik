@@ -238,6 +238,7 @@ def organization_profile_editor(request):
 def vacancy_page(request, pk):
     vacancy = Vacancy.objects.get(id=pk)
     responses = Responses.objects.filter(vacancy=vacancy)
+    res_data = {}
     if request.method == "POST":
         data = json.loads(request.body.decode("utf-8"))
         if request.user.id == vacancy.organisation.id:
@@ -266,14 +267,15 @@ def vacancy_page(request, pk):
                       ' заинтересовался вашей вакансией: ' + str(response.vacancy.title)
             send_mail(settings.EMAIL_TOPIC, message,
                       settings.EMAIL_HOST_USER, [response.vacancy.organisation.email])
-    is_respond = False
-    is_confirm = False
+    res_data['is_respond'] = False
+    res_data['is_confirm'] = False
     if request.user.is_authenticated and responses.filter(user=request.user).exists():
-        is_respond = True
+        res_data['is_respond'] = True
         r = responses.get(user=request.user)
-        is_confirm = r.is_confirmed
-    return render(request, 'main_app/vacancy_page.html',
-                  {"vacancy": vacancy, "responses": responses, "is_respond": is_respond, 'is_confirm': is_confirm})
+        res_data['is_confirm'] = r.is_confirmed
+    res_data['vacancy'] = vacancy
+    res_data['responses'] = responses
+    return render(request, 'main_app/vacancy_page.html', res_data)
 
 
 @company_login_required
