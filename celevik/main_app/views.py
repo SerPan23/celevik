@@ -264,7 +264,7 @@ def vacancy_page(request, pk):
                 response.save()
                 message = 'Вам подтвердили заявку на ' + str(response.vacancy.title) + '\nОт ' \
                           + str(response.vacancy.organisation.user_info.name) \
-                          + '\nДождитесь пока с вами свяжется организация или обратитесь по номеру телефона ' \
+                          + '\nДождитесь пока с вами свяжется представитель организации или самостоятельно обратитесь по номеру телефона ' \
                           + str(response.vacancy.organisation.user_info.phone_number) \
                           + ' или по почте ' + str(response.vacancy.organisation.email)
                 send_mail(settings.EMAIL_TOPIC, message,
