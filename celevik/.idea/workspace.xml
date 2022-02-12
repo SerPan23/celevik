@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6ca58a6b-9d61-465a-b370-af220c5d8234" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main_app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main_app/organization_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/organization_profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main_app/user_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/user_profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main_app/user_vacancies_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/user_vacancies_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main_app/vacancy_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/vacancy_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/celevik/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/celevik/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +104,7 @@
       <workItem from="1644329749769" duration="462000" />
       <workItem from="1644496973811" duration="14949000" />
       <workItem from="1644592917655" duration="3479000" />
-      <workItem from="1644663391812" duration="94000" />
+      <workItem from="1644663391812" duration="985000" />
     </task>
     <servers />
   </component>

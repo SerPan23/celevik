@@ -25,11 +25,11 @@ SECRET_KEY = 'django-insecure--2j=#6w*dxzvc7mc@!fwx&jo)lw5*)h)m0jnu6_^p)qdgm@7iw
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'admin@led-iteam.ru'
-EMAIL_HOST_PASSWORD = '!Led_ITeam'
+EMAIL_HOST_USER = 'admin@celevik.site'
+EMAIL_HOST_PASSWORD = 'Ewqdsacxz!23'
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
-DEFAULT_FROM_EMAIL = 'admin@led-iteam.ru'
+DEFAULT_FROM_EMAIL = 'admin@celevik.site'
 EMAIL_TOPIC = 'Целевик'
 
 # SECURITY WARNING: don't run with debug turned on in production!
