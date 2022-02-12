@@ -262,11 +262,10 @@ def vacancy_page(request, pk):
                 response = responses.get(user=u)
                 response.is_confirmed = True
                 response.save()
-                message = 'Вам подтвердили заявку на ' + str(response.vacancy.title) + '\nОт ' \
-                          + str(response.vacancy.organisation.user_info.name) \
-                          + '\nДождитесь пока с вами свяжется представитель организации или самостоятельно обратитесь по номеру телефона ' \
-                          + str(response.vacancy.organisation.user_info.phone_number) \
-                          + ' или по почте ' + str(response.vacancy.organisation.email)
+                message = 'Вам подтвердили заявку на ' + str(response.vacancy.title) \
+                          + '\nКонтактная информация для свзяи с ' + str(response.vacancy.organisation.user_info.name) \
+                          + '\nНомер телефона: ' + str(response.vacancy.organisation.user_info.phone_number) \
+                          + '\nEmail: ' + str(response.vacancy.organisation.email)
                 send_mail(settings.EMAIL_TOPIC, message,
                           settings.EMAIL_HOST_USER, [u.email])
             elif data["type"] == "del":
