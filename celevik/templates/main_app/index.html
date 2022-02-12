@@ -42,7 +42,7 @@
                 <div class="col-12 col-md-6 col-lg-4 col-xxl-3 mb-5">
                     <div class="vacancy-card">
                         <h5 class="name">{{ vacancy.title }}</h5>
-                        <p class="description">{{ vacancy.description|truncatechars:120 }}</p>
+                        <p class="description">{{ vacancy.description|safe|truncatechars:120 }}</p>
                         <p class="partners">
                             <span>Вузы партнеры: </span>
                             {% with vacancy.partners|split:"|" as partners %}

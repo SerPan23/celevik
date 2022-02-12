@@ -30,11 +30,11 @@
             </div>
             <div class="description mb-3">
                 <h5>Описание:</h5>
-                {{ vacancy.description }}
+                {{ vacancy.description|safe }}
             </div>
             <div class="requirements mb-3">
                 <h5>Требования:</h5>
-                {{ vacancy.requirements }}
+                {{ vacancy.requirements|safe }}
             </div>
             {% if user.is_authenticated %}
                 <hr>

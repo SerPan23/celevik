@@ -26,7 +26,7 @@
     <div class="container">
         <h2 class="text-center mb-2">Обо мне:</h2>
         <h5 class="text-about-me">
-            {{ u_info.text_about }}
+            {{ u_info.text_about|safe }}
         </h5>
     </div>
 {% endblock content %}
