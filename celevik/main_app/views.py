@@ -69,8 +69,16 @@ def index(request):
 def registration(request):
     if request.method == "POST":
         email = request.POST.get("email")
+        if User.objects.filter(username=email).exists():
+            return HttpResponseRedirect("/registration?username_busy=True")
         password = request.POST.get("password")
         password2 = request.POST.get("password2")
+        name = request.POST.get("name")
+        surname = request.POST.get("surname")
+        patronymic = request.POST.get("patronymic")
+        phone_number = request.POST.get("phone_number")
+        date_of_birth = request.POST.get("date_of_birth")
+        text_about = request.POST.get("text_about")
         if password != password2:
             return HttpResponseRedirect("/registration?error_pass=True")
         try:
@@ -83,13 +91,20 @@ def registration(request):
         code = generate_code()
         user_inf = UsersInf.objects.create(user=new_user, code=code)
         user_inf.code = code
+        user_inf.name = name
+        user_inf.surname = surname
+        user_inf.patronymic = patronymic
+        user_inf.phone_number = phone_number
+        user_inf.date_of_birth = date_of_birth
+        user_inf.text_about = text_about
         user_inf.save()
         message = 'Код подтверждения регистрации: ' + code
         send_mail(settings.EMAIL_TOPIC, message,
                   settings.EMAIL_HOST_USER, [email])
         return HttpResponseRedirect("/account_confirmation?username=" + email)
     error_pass = request.GET.get("error_pass", "")
-    return render(request, "registration/registration.html", {'error_pass': error_pass})
+    username_busy = request.GET.get("username_busy", "")
+    return render(request, "registration/registration.html", {'error_pass': error_pass, 'username_busy': username_busy})
 
 
 def generate_code():

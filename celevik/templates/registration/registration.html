@@ -10,6 +10,9 @@
                     {% if error_pass %}
                         <p style="color: red;">Пароли не совпадают. Пожалуйста, попробуйте еще раз.</p>
                     {% endif %}
+                    {% if username_busy %}
+                        <p style="color: red;">Пользователь с указанной почтой уже зарегистрирован. Попробуйте другую почту.</p>
+                    {% endif %}
                     {% if vale %}
                         {% for error in vale %}
                             <p style="color: red;">{{ error|escape }}</p>
@@ -37,6 +40,35 @@
                             </div>
                             <input type="password" class="form-control formInput" name="password2" placeholder="Повторите пароль" required>
                         </div>
+
+                        <div class="input-group flex-nowrap mb-4">
+                            <input id="name" type="text" name="name" class="textinput textInput  form-control formInput" placeholder="Имя" aria-label="name"
+                                aria-describedby="addon-wrapping" required>
+                        </div>
+                        <div class="input-group flex-nowrap mb-4">
+                            <input id="surname" type="text" name="surname" class="textinput textInput  form-control formInput" placeholder="Фамилия" aria-label="surname"
+                                aria-describedby="addon-wrapping" required>
+                        </div>
+                        <div class="input-group flex-nowrap mb-4">
+                            <input id="patronymic" type="text" name="patronymic"  class="textinput textInput  form-control formInput" placeholder="Отчество" aria-label="patronymic"
+                                aria-describedby="addon-wrapping" required>
+                        </div>
+                        <div class="input-group flex-nowrap mb-4">
+                            <div class="input-group-text formInput">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <input id="phone_number" type="tel" name="phone_number" class="textinput textInput  form-control formInput phone" placeholder="+7 999 999 99 99" aria-label="phone_number"
+                                aria-describedby="addon-wrapping">
+                        </div>
+                        <div class="input-group flex-nowrap mb-4">
+                            <input id="date_of_birth" type="date" name="date_of_birth" class="textinput textInput  form-control formInput" aria-label="date_of_birth"
+                                aria-describedby="addon-wrapping" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="text_about" class="form-label">Обо мне</label>
+                            <textarea id="text_about" name="text_about" class="form-control textInput" rows="5"  required></textarea>
+                        </div>
                         <div class="form-check mb-4" style="text-align: left; margin: 0 0.5em">
                             <input name="accessPrivacy" type="checkbox" class="form-check-input" id="accessPrivacy" required>
                             <label class="form-check-label" for="accessPrivacy">Согласен с
@@ -50,5 +82,13 @@
 {% endblock content %}
 
 {% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js" integrity="sha512-KaIyHb30iXTXfGyI9cyKFUIRSSuekJt6/vqXtyQKhQP6ozZEGY8nOtRS6fExqE4+RbYHus2yGyYg1BrqxzV6YA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'js/cleave-phone.i18n.js' %}"></script>
+    <script>
+        const cleave = new Cleave('.phone', {
+            phone: true,
+            phoneRegionCode: 'RU'
+        });
+    </script>
 {% endblock scripts %}
 
