@@ -49,7 +49,9 @@ input, .form-control
 nav
   &.navbar
     min-height: 70px
-    @media (max-width: 767px)
+    @media (max-width: 390px)
+      padding: 0 10px
+    @media (min-width: 391px) and (max-width: 767px)
       padding: 0 15px
     @media (min-width: 767px)
       padding: 0 50px
@@ -59,6 +61,7 @@ nav
     color: $textColor
     font-size: 1.8rem
     font-weight: bold
+    margin: 0
   .nav-btn
     user-select: none
     background: $linkColor
