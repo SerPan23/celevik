@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-check mb-4" style="text-align: left; margin: 0 0.5em">
                             <input name="accessPrivacy" type="checkbox" class="form-check-input" id="accessPrivacy" required>
-                            <label class="form-check-label" for="accessPrivacy">Согласены с
+                            <label class="form-check-label" for="accessPrivacy">Согласны с
                                     <a href="#" class="links">политикой конфиденциальности</a>
                             </label>
                         </div>
@@ -50,7 +50,9 @@
     <script>
         const cleave = new Cleave('.phone', {
             phone: true,
-            phoneRegionCode: 'RU'
+            blocks: [2, 3, 3, 2, 2],
+            phoneRegionCode: 'RU',
+            numericOnly:true,
         });
     </script>
 {% endblock scripts %}

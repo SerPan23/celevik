@@ -110,7 +110,9 @@
     <script>
         const cleave = new Cleave('.phone', {
             phone: true,
-            phoneRegionCode: 'RU'
+            blocks: [2, 3, 3, 2, 2],
+            phoneRegionCode: 'RU',
+            numericOnly:true,
         });
     </script>
 
