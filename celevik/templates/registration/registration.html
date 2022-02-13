@@ -65,7 +65,8 @@
                             <input id="phone_number" type="tel" name="phone_number" class="textinput textInput  form-control formInput phone" placeholder="+7 999 999 99 99" aria-label="phone_number"
                                 aria-describedby="addon-wrapping" required>
                         </div>
-                        <div class="input-group flex-nowrap mb-4">
+                        <div class="mb-4">
+                            <label for="date_of_birth" class="form-label">Дата рождения</label>
                             <input id="date_of_birth" type="date" name="date_of_birth" class="textinput textInput  form-control formInput" aria-label="date_of_birth"
                                 aria-describedby="addon-wrapping" required>
                         </div>
@@ -90,6 +91,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js" integrity="sha512-KaIyHb30iXTXfGyI9cyKFUIRSSuekJt6/vqXtyQKhQP6ozZEGY8nOtRS6fExqE4+RbYHus2yGyYg1BrqxzV6YA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{% static 'js/cleave-phone.i18n.js' %}"></script>
     <script>
+        document.getElementById('date_of_birth').valueAsDate = new Date();
         const cleave = new Cleave('.phone', {
             phone: true,
             blocks: [2, 3, 3, 2, 2],
