@@ -12,9 +12,11 @@
                 <div class="col-12 col-md-6 col-lg-4 col-xxl-3 mb-5">
                     <div class="vacancy-card">
                         <h5 class="name">{{ response.vacancy.title }}</h5>
-                        <p class="description">{{ response.vacancy.description|safe|truncatechars:120 }}</p>
+                        <p class="organisation">Заказчик целевого обучения:<br>
+                            <a class="org-name link" href="/organization_profile/{{ response.vacancy.organisation.id }}">{{ response.vacancy.organisation.user_info.name }}</a>
+                        </p>
                         <p class="partners">
-                            <span>Вузы партнеры: </span>
+                            <span>Вузы партнеры: </span><br>
                             {% with response.vacancy.partners|split:"|" as partners %}
                                 {% for p in partners %}
                                     <span class="partner">{{ p }}</span>{% if not forloop.last %},{% endif %}

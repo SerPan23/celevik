@@ -75,16 +75,19 @@ nav {
     max-height: 75px;
     min-height: 75px;
     overflow: hidden; }
-  .vacancy-card .description {
-    margin-top: 20px;
-    max-height: 100px;
-    min-height: 100px;
-    overflow: hidden;
-    color: #424347; }
+  .vacancy-card .organisation {
+    margin: 15px 0;
+    max-height: 80px;
+    min-height: 80px;
+    overflow: hidden; }
+    .vacancy-card .organisation .org-name {
+      font-weight: 500;
+      font-style: italic;
+      color: #176DEA; }
   .vacancy-card .partners {
-    margin-top: 15px;
-    max-height: 50px;
-    min-height: 50px;
+    margin: 10px 0;
+    max-height: 70px;
+    min-height: 70px;
     overflow: hidden;
     color: #424347; }
     .vacancy-card .partners .partner {
