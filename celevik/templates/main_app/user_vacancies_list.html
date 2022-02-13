@@ -11,7 +11,7 @@
             {% for response in responses %}
                 <div class="col-12 col-md-6 col-lg-4 col-xxl-3 mb-5">
                     <div class="vacancy-card">
-                        <h5 class="name">{{ response.vacancy.title }}</h5>
+                        <h5 class="name">{{ response.vacancy.title }}<br>{% if response.is_confirmed %}<span style="color: #00B74A">Заявка подтверждена</span>{% endif %}</h5>
                         <p class="organisation">Заказчик целевого обучения:<br>
                             <a class="org-name link" href="/organization_profile/{{ response.vacancy.organisation.id }}">{{ response.vacancy.organisation.user_info.name }}</a>
                         </p>
