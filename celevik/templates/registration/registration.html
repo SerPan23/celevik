@@ -146,7 +146,7 @@
                     pass_progress.classList.remove('bg-warning')
                 if(pass_progress.classList.contains('bg-success'))
                     pass_progress.classList.remove('bg-success')
-                input_password.setCustomValidity("Пароль слишком слабый. Пароль должен состоять из цифр и букв и иметь спец. символы или хотя бы одну заглавную букву");
+                input_password.setCustomValidity("Пароль слишком слабый. Пароль должен состоять из цифр и букв и иметь спец. символы или заглавные буквы");
             }
             else if (input_password_val.length >= 8 && rating < 4 && rating > 2) {
                 pass_progress.style.width = "50%";
