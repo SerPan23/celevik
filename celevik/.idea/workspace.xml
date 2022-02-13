@@ -3,7 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="6ca58a6b-9d61-465a-b370-af220c5d8234" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/main.sass" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/main_app/.sass-cache/eb73fcc0757c3d5d2b6874df39015b3266de676b/main.sassc" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main_app/.sass-cache/eb73fcc0757c3d5d2b6874df39015b3266de676b/main.sassc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/registration/.sass-cache/eb73fcc0757c3d5d2b6874df39015b3266de676b/main.sassc" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/registration/.sass-cache/eb73fcc0757c3d5d2b6874df39015b3266de676b/main.sassc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/registration/.sass-cache/fde555f7245d3b1d729ae2cec2cd524bea408ee6/registration.sassc" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/registration/.sass-cache/fde555f7245d3b1d729ae2cec2cd524bea408ee6/registration.sassc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/registration/registration.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/registration/registration.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/registration/registration.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/registration/registration.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/registration/registration.sass" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/registration/registration.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/registration.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +112,7 @@
       <workItem from="1644496973811" duration="14949000" />
       <workItem from="1644592917655" duration="3479000" />
       <workItem from="1644663391812" duration="10905000" />
+      <workItem from="1644744793241" duration="5880000" />
     </task>
     <servers />
   </component>

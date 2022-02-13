@@ -28,17 +28,22 @@
                             <input type="email" name="email" class="form-control formInput" placeholder="example@gmail.com" aria-label="email"
                                 aria-describedby="addon-wrapping" required>
                         </div>
-                        <div class="input-group flex-nowrap mb-4">
+                        <div class="input-group flex-nowrap mb-1">
                             <div class="input-group-text formInput">
                                 <i class="fas fa-lock"></i>
                             </div>
-                            <input type="password" class="form-control formInput" name="password" placeholder="Пароль" required>
+                            <input minlength="8" id="password" type="password" class="form-control formInput" name="password" placeholder="Пароль" required>
+                        </div>
+                        <div class="mb-4">
+                            <div id="pass-progress-div" class="progress d-none">
+                                <div id="pass-progress" class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
                         </div>
                         <div class="input-group flex-nowrap mb-4">
                             <div class="input-group-text formInput">
                                <i class="fas fa-lock"></i>
                             </div>
-                            <input type="password" class="form-control formInput" name="password2" placeholder="Повторите пароль" required>
+                            <input minlength="8" id="password2" type="password" class="form-control formInput" name="password2" placeholder="Повторите пароль" required>
                         </div>
 
                         <div class="input-group flex-nowrap mb-4">
@@ -58,7 +63,7 @@
                                 <i class="fas fa-phone"></i>
                             </div>
                             <input id="phone_number" type="tel" name="phone_number" class="textinput textInput  form-control formInput phone" placeholder="+7 999 999 99 99" aria-label="phone_number"
-                                aria-describedby="addon-wrapping">
+                                aria-describedby="addon-wrapping" required>
                         </div>
                         <div class="input-group flex-nowrap mb-4">
                             <input id="date_of_birth" type="date" name="date_of_birth" class="textinput textInput  form-control formInput" aria-label="date_of_birth"
@@ -87,8 +92,93 @@
     <script>
         const cleave = new Cleave('.phone', {
             phone: true,
-            phoneRegionCode: 'RU'
+            blocks: [2, 3, 3, 2, 2],
+            phoneRegionCode: 'RU',
+            numericOnly:true,
         });
+    </script>
+    <script>
+        let s_letters = "qwertyuiopasdfghjklzxcvbnm";
+        let b_letters = "QWERTYUIOPLKJHGFDSAZXCVBNM";
+        let digits = "0123456789";
+        let specials = "!@#$%^&*()_-+=\|/.,:;[]{}";
+
+        let input_password = document.getElementById('password');
+        let input_password2 = document.getElementById('password2');
+        let pass_progress = document.getElementById('pass-progress');
+        let pass_progress_div = document.getElementById('pass-progress-div');
+        input_password.addEventListener('keyup', function(evt){
+            let input_password_val = input_password.value;
+
+            let is_s = false;
+            let is_b = false;
+            let is_d = false;
+            let is_sp = false;
+
+            for (var i = 0; i < input_password_val.length; i++) {
+                if (!is_s && s_letters.indexOf(input_password_val[i]) !== -1) {
+                     is_s = true
+                }
+                else if (!is_b && b_letters.indexOf(input_password_val[i]) !== -1) {
+                      is_b = true
+                }
+                else if (!is_d && digits.indexOf(input_password_val[i]) !== -1) {
+                       is_d = true
+                }
+                else if (!is_sp && specials.indexOf(input_password_val[i]) !== -1) {
+                       is_sp = true
+                }
+            }
+
+            let rating = 0;
+            if (is_s) rating++;
+            if (is_b) rating++;
+            if (is_d) rating++;
+            if (is_sp) rating++;
+            if (input_password_val.length < 8 || rating < 2) {
+                pass_progress.style.width = "25%";
+                pass_progress.style.color = "white";
+                pass_progress.textContent = "Слабый пароль";
+                pass_progress.classList.add("bg-danger")
+                if(pass_progress.classList.contains('bg-warning'))
+                    pass_progress.classList.remove('bg-warning')
+                if(pass_progress.classList.contains('bg-success'))
+                    pass_progress.classList.remove('bg-success')
+                input_password.setCustomValidity("Пароль слишком слабый. Пароль должен состоять из цифр и букв и иметь спец. символы или хотя бы одну большую букву");
+            }
+            else if (input_password_val.length >= 8 && rating < 4 && rating >= 2) {
+                pass_progress.style.width = "50%";
+                pass_progress.style.color = "black";
+                pass_progress.textContent = "Средний пароль";
+                pass_progress.classList.add("bg-warning")
+                if(pass_progress.classList.contains('bg-danger'))
+                    pass_progress.classList.remove('bg-danger')
+                if(pass_progress.classList.contains('bg-success'))
+                    pass_progress.classList.remove('bg-success')
+                input_password.setCustomValidity('')
+            }
+            else if (input_password_val.length >= 8 && rating === 4) {
+                pass_progress.style.width = "100%";
+                pass_progress.style.color = "white";
+                pass_progress.textContent = "Сложный пароль";
+                pass_progress.classList.add("bg-success")
+                if(pass_progress.classList.contains('bg-warning'))
+                    pass_progress.classList.remove('bg-warning')
+                if(pass_progress.classList.contains('bg-danger'))
+                    pass_progress.classList.remove('bg-danger')
+                input_password.setCustomValidity('')
+            }
+            if(pass_progress_div.classList.contains('d-none'))
+                pass_progress_div.classList.remove('d-none')
+        });
+        input_password2.addEventListener('keyup', function(evt){
+            let input_password_val = input_password.value;
+            let input_password2_val = input_password2.value;
+            if(input_password_val !== input_password2_val)
+                input_password2.setCustomValidity('Пароли не совпадают!')
+            else
+                input_password2.setCustomValidity('')
+        })
     </script>
 {% endblock scripts %}
 
