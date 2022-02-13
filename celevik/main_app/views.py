@@ -341,6 +341,10 @@ def company_reg(request):
         application = CompanyRegApplication.objects.create(name=name, email=email, phone_number=phone_number,
                                                            text_about=text_about)
         application.save()
+        message = 'Ваша заявка принята, ожидайте решения\n'\
+                  + 'Если Вы не получили ответ в течение 7 дней, то Вы можете связаться с нами по эл.почте: admin@celevik.site'
+        send_mail(settings.EMAIL_TOPIC, message,
+                  settings.EMAIL_HOST_USER, [email])
         return HttpResponseRedirect("/")
     return render(request, "registration/company_reg.html")
 
