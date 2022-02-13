@@ -137,7 +137,7 @@
             if (is_b) rating++;
             if (is_d) rating++;
             if (is_sp) rating++;
-            if (input_password_val.length < 8 || rating < 2) {
+            if (input_password_val.length < 8 || rating <= 2) {
                 pass_progress.style.width = "25%";
                 pass_progress.style.color = "white";
                 pass_progress.textContent = "Слабый пароль";
@@ -146,9 +146,9 @@
                     pass_progress.classList.remove('bg-warning')
                 if(pass_progress.classList.contains('bg-success'))
                     pass_progress.classList.remove('bg-success')
-                input_password.setCustomValidity("Пароль слишком слабый. Пароль должен состоять из цифр и букв и иметь спец. символы или хотя бы одну большую букву");
+                input_password.setCustomValidity("Пароль слишком слабый. Пароль должен состоять из цифр и букв и иметь спец. символы или хотя бы одну заглавную букву");
             }
-            else if (input_password_val.length >= 8 && rating < 4 && rating >= 2) {
+            else if (input_password_val.length >= 8 && rating < 4 && rating > 2) {
                 pass_progress.style.width = "50%";
                 pass_progress.style.color = "black";
                 pass_progress.textContent = "Средний пароль";
