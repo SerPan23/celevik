@@ -35,12 +35,9 @@ nav {
   background: #ffffff; }
   nav.navbar {
     min-height: 70px; }
-    @media (max-width: 390px) {
+    @media (max-width: 767px) {
       nav.navbar {
-        padding: 0 10px; } }
-    @media (min-width: 391px) and (max-width: 767px) {
-      nav.navbar {
-        padding: 0 15px; } }
+        padding: 0 3px; } }
     @media (min-width: 767px) {
       nav.navbar {
         padding: 0 50px; } }
