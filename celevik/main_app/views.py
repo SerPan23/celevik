@@ -194,7 +194,7 @@ def user_profile_editor(request):
                 u_info.date_of_birth = date_of_birth
             if text_about != '':
                 u_info.text_about = text_about
-            if request.FILES["avatar"]:
+            if request.FILES["avatar"] != '':
                 u_info.image = request.FILES["avatar"]
             u_info.save()
     return render(request, 'main_app/user_profile_editor.html', {'u_info': u_info, 'error_pass': error_pass})
