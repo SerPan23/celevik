@@ -182,6 +182,7 @@ def user_profile_editor(request):
             phone_number = request.POST.get("phone_number")
             date_of_birth = request.POST.get("date_of_birth")
             text_about = request.POST.get("text_about")
+            avatar = request.FILES.get("avatar", 'puples_photo/default_avatar.png')
             if name != '':
                 u_info.name = name
             if surname != '':
@@ -194,8 +195,8 @@ def user_profile_editor(request):
                 u_info.date_of_birth = date_of_birth
             if text_about != '':
                 u_info.text_about = text_about
-            if request.FILES["avatar"] != '':
-                u_info.image = request.FILES["avatar"]
+            if avatar != '':
+                u_info.image = avatar
             u_info.save()
     return render(request, 'main_app/user_profile_editor.html', {'u_info': u_info, 'error_pass': error_pass})
 
