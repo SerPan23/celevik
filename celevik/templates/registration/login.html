@@ -32,7 +32,8 @@
                                 </div>
                                 <input id="id_password" type="password" class="textinput textInput  form-control formInput" name="password" placeholder="Пароль" required>
                                 <div class="input-group-text formInput" onclick="showHidePwd()" style="cursor: pointer;">
-                                        <i id="eye" class="far fa-eye-slash"></i>
+                                        <i id="eye" class="far fa-eye" style="display: none;"></i>
+                                        <i id="eyeslash" class="far fa-eye-slash"></i>
                                 </div>
                             </div>
                             <button class="btn-styled link-btn">Войти</button>
@@ -58,10 +59,12 @@
                 var input = document.getElementById("id_password");
                 if (input.type === "password") {
                     input.type = "text";
-                    document.getElementById("eye").className = "far fa-eye";
+                    document.getElementById("eye").style.display = "inline";
+                    document.getElementById("eyeslash").style.display = "none";
                 } else {
                     input.type = "password";
-                    document.getElementById("eye").className = "far fa-eye-slash";
+                    document.getElementById("eye").style.display = "none";
+                    document.getElementById("eyeslash").style.display = "inline";
                 }
             }
     </script>
