@@ -3,9 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="6ca58a6b-9d61-465a-b370-af220c5d8234" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main_app/add_vacancy.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/add_vacancy.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main_app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Проект.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../Проект.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main_app/organization_profile_editor.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/organization_profile_editor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main_app/user_profile_editor.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_app/user_profile_editor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/company_reg.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/company_reg.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/registration.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +40,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../IT_Starts2020/ElectronicBook" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../general-system-of-admission-to-the-university/sysofadmission" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -111,6 +113,9 @@
       <workItem from="1645194736204" duration="1459000" />
       <workItem from="1645973550145" duration="181000" />
       <workItem from="1646048078492" duration="292000" />
+      <workItem from="1646760460120" duration="1983000" />
+      <workItem from="1647458489956" duration="31000" />
+      <workItem from="1647873474372" duration="346000" />
     </task>
     <servers />
   </component>
